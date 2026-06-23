@@ -1,0 +1,141 @@
+@use 'variables.scss' as vars;
+
+.user-page {
+    margin: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: vars.$color2;
+    position: relative;
+    padding: 15px;
+    background-color: vars.$color32;
+
+    &::before,
+    &::after {
+    content: "";
+    position: fixed;
+    width: 150vw;
+    height: 150vw;
+    border-radius: 45%;
+    pointer-events: none;
+    }
+        
+    &::before {
+        background: vars.$color4;
+        top: 10vw;
+        left: -40vw;
+        right: 40vw;
+        animation: rotateBlob 25s linear infinite;
+    }
+
+    &::after {
+        background: vars.$color5;
+        top: -10vw;
+        right: -30vw;
+        left: 30vw;
+        animation: rotateBlobReverse 35s linear infinite;
+        //z-index: -1;
+    }
+
+        //title 
+
+        .over{
+            position: relative;
+            z-index: 5;
+
+        .title{
+            font-family: vars.$font1;
+            font-size: vars.$font-size4;
+            color:vars.$color25;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            text-shadow:
+                -1px -1px 0 vars.$color1;
+                font-weight: 800;
+        }
+
+        h2{
+            margin-bottom: 60px;
+            text-shadow:
+            -1px -1.5px 0 vars.$color2;
+            font-weight: 700;
+            font-size: vars.$font-size5;
+        }
+
+        
+
+        .inLine{
+            display: flex;
+            flex-wrap: wrap;
+            gap:20px;
+        }
+
+
+
+        .input-group.mb-3{
+            flex: 1 1 300px;
+        }
+        
+
+        .buttonSend{
+            margin-bottom: 30px;
+            &:hover{
+                background-color: vars.$color3;
+            }
+        }
+
+        .navbar-brand{
+            font-family: vars.$font1;
+            font-size: vars.$font-size6;
+            text-decoration: underline;
+
+            &:hover{
+                color:vars.$color25;
+            }
+        }
+
+
+        
+button{     margin-top: 30px;
+            padding:10px;
+            font-family: vars.$font1;
+            color:vars.$color2;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            border-radius: 15%;
+            border-style:double;
+            border-color: vars.$color2;
+            background: vars.$color5;
+            &:hover{
+                color:vars.$color5;
+
+            }
+            
+        }
+
+        .navbar-brand{
+            &:hover{
+                color:vars.$color3;
+            }
+        }
+    }
+}
+
+
+
+
+@keyframes rotateBlob {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateBlobReverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

@@ -1,0 +1,42 @@
+
+    @use 'variables.scss' as vars;
+    
+    
+#form{
+    background: vars.$color32;
+    margin-top: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: vars.$color1;
+    font-size: vars.$font-size6;
+    font-family: vars.$font2;
+    margin-bottom: 10px;
+
+    p{
+        font-family: vars.$font1;
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+    button{
+        background-color: vars.$color2;
+        margin-bottom: 10px;
+    }
+}
+
+
+//change color button send
+#submit{
+    color:vars.$color1;
+}
+
+
+
+/* Responsive */
+/*pc */
+@media (min-width: 900px) {
+#question{
+        font-size: vars.$font-size5;
+    }
+}
+
+

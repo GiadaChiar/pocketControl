@@ -1,0 +1,57 @@
+
+@use 'variables.scss' as vars;
+
+
+//styling popup info/error
+
+.custom-popup{
+    background-color: vars.$color2;
+    position: fixed;
+    top:auto;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:  1px solid vars.$color32;
+    z-index: 9998;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+
+    .popup-box{
+        background-color: vars.$color6;
+        padding-top: 35px;
+        padding-bottom: 15px;
+        padding-right: 70px;
+        padding-left: 70px;
+        margin-left: 30px;
+        margin-right: 30px;
+        border-radius: 8px;
+        width: auto;
+        height: auto;
+        max-width: 90%;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        border:  1px solid vars.$color3;
+        z-index: 9997;
+
+        h4{
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+
+        p{
+            margin-bottom: 15px;
+        }
+
+        button{
+            &:hover{
+                color:vars.$color25;
+                transform: scale(1.05);
+            }
+        }
+
+    }
+}

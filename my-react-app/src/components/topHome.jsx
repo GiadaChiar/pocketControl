@@ -1,0 +1,48 @@
+
+
+import teamImg from "../assets/team.jpeg";
+
+
+
+
+// home page 
+
+export default function TopHome() {
+    return (
+        <>
+            
+                <div className="bubbles">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                    <div className="center">
+                        <div className="under">
+                            <h1 >Financial</h1>
+                            <h1 >Control</h1>
+                            <p>Rendi facile e a portatata di mano la tua gestione finanziaria</p>
+                            <p>Insieme a noi.</p>
+                        </div>
+                        <div className="circle-wrapper">
+                            <div className="outer-circle">
+                                <img src={teamImg} alt="profile" />
+
+                                <div className="inner-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+            
+        </>
+    );
+}
+
+
+
+
+
+
+
