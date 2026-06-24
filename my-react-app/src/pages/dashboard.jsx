@@ -1,18 +1,13 @@
 
-/*import "../style/search.scss";
-import "../style/cart.scss";
-import "../style/popUp.scss";
-import SearchBar from "../components/searchbar";
-import FiltersCollapse from "../components/filterCollapse";
-import ScrollCarts from "../components/scrollCarts";*/
-
-//search page
+import Menu from "../components/menu";
+import "../style/menu.scss";
 
 function DashBoard() {
     //function to send clicked to first button send
 
     return (
         <>
+            <Menu/>
             <h1>Are you ready to cook?</h1>
             <div id="green_background">
             

@@ -41,7 +41,7 @@ export function LogIn() {
                 credentials.password
             );
 
-            if (user.type === "login") {
+            //if (user.type === "login") {
                 console.log("arrivato richiesta", user.type)
                 if (user.success === false) {
                     setPopup({
@@ -56,13 +56,14 @@ export function LogIn() {
                         alert: "Registrazione eseguita",
                         message: "Bentornato"
                     });
-                    if (user.token) {
-                        localStorage.setItem("token", user.token);
+                    if (user.data) {
+                        localStorage.setItem("token", user.data);
+                        console.log("TOKEN SALVATO:", user.data);
                         navigate("/dashboard")
                         
                         }
                     return;
-                }
+                //}
             }
         } catch {
             setPopup({

@@ -40,6 +40,7 @@ export default function Registration() {
         )
 
         if (!credentials) return;
+        console.log(credentials);
 
         try {
             const user = await registartionService(
@@ -64,13 +65,12 @@ export default function Registration() {
                         alert: "Registrazione eseguita",
                         message: "Benvenuto"
                     });
-                    navigate("/valuta", {
-                        state: {
-                            data: user.data
-                        }
-                    });
-                    return;
+                    if (user.data) {
+                        localStorage.setItem("token", user.data);
+                        navigate("/dashboard")
 
+                    }
+                    return;
                 }
             }
 

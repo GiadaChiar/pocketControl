@@ -14,12 +14,12 @@ export async function loginService(email, password) {
 export async function registartionService(email,
     name,
     surname,
-    password_hash) {
+    password) {
     return await registerUser({
         request: "registration",
         email,
         name,
         surname,
-        password_hash
+        password
     });
 }
