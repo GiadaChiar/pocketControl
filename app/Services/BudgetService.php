@@ -57,7 +57,7 @@ exit;
 }
 
 
-    public function getAll($idUser)
+    public function getAll($idUser ,$data= null)
     {
         try {
             //search by userID 
@@ -66,8 +66,9 @@ exit;
             if (!$existingUser) {
                 throw new \Exception("Utente non registrato correttamente, effettuare il login");
             }
+            
 
-            $results = $this->budgetModel->get($idUser);
+            $results = $this->budgetModel->get($idUser,$data);
 
             if (empty($results)) {
                 throw new \Exception(",Nessun obbiettivo presente");
@@ -91,6 +92,13 @@ exit;
             throw new \Exception("Utente non valido");
         }
 
+        echo json_encode([
+            "success" => true,
+            "type" => "fin qui",
+            "date" => $id,
+            "idUser" =>$userId
+        ]);
+        exit;
         return $this->budgetModel->delete($id, $userId);
     }
 }

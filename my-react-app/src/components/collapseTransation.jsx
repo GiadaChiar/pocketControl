@@ -149,7 +149,7 @@ export default function CollapseTransation() {
                             />
                         )}
 
-
+                        <div className="inLine">
                         <DropDown
                             label="Tipologia"
                             id="type_drop"
@@ -176,7 +176,6 @@ export default function CollapseTransation() {
                             onSelect={(value) => setCategory(value)}
                         />
 
-                        
 
                         {getCategory === "custom" && (
                             <Input
@@ -187,9 +186,11 @@ export default function CollapseTransation() {
                                 text_span="Altro"
                                 onChange={(e) => setCustomCategory(e.target.value)}
                             />
-                        )}
+                            )}
+                        </div>
 
-
+                        <div className="inLine">
+                        <div>
                         <Input
                             id="amount"
                             type="number"
@@ -199,8 +200,9 @@ export default function CollapseTransation() {
                             onChange={(e) =>
                                 setAmount(e.target.value)
                             }
-                        />
-
+                                />
+                            </div>
+                        <div>
                         <DataInput
                             label="data"
                             id="date_transation"
@@ -208,8 +210,9 @@ export default function CollapseTransation() {
                             value={getDate}
                             onChange={(e) => setDate(e.target.value)}
                             
-                        />
-
+                                />
+                            </div>
+                        <div>
                         <Input
                             id="description"
                             type="text"
@@ -219,7 +222,9 @@ export default function CollapseTransation() {
                             onChange={(e) =>
                                 setDescription(e.target.value)
                             }
-                        />
+                            />
+                            </div>
+                        </div>
 
                         <div>
                             <Button

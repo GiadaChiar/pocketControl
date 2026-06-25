@@ -51,7 +51,8 @@ class OperationModel
 
 
 
-    public function get( int $idUser, ?string $field= null , ?string $value = null){
+    public function get( int $idUser,  ?array $date = null, ?string $field= null , ?string $value = null){
+
 
     $query = "
     SELECT * FROM transactions
@@ -62,9 +63,25 @@ class OperationModel
         ];
 
     if ($field && $value){
-        $query .="AND {$field} = :value";
+        $query .=" AND {$field} = :value";
         $params[":value"] = $value;
     }
+
+
+    if (
+        !empty($date['start_date']) &&
+        !empty($date['end_date'])
+    ) {
+        $query .= "
+         AND date BETWEEN :start_date AND :end_date
+    ";
+
+
+        $params[':start_date'] = $date['start_date'];
+        $params[':end_date'] = $date['end_date'];
+        }
+
+        $query .= "ORDER BY date ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);

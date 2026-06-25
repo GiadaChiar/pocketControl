@@ -50,7 +50,7 @@ class BudgetModel
     }
 
 
-    public function get(int $idUser)
+    public function get(int $idUser, array $data)
     {
 
         $query = "
@@ -61,6 +61,21 @@ class BudgetModel
             ":user_id" => $idUser
         ];
 
+        if (
+            !empty($data['start_date']) &&
+            !empty($data['end_date'])
+        ) {
+            $query .= "
+            AND start_date >= :start_date AND end_date <= :end_date
+        ";
+
+
+            $params[':start_date'] = $data['start_date'];
+            $params[':end_date'] = $data['end_date'];
+        }
+
+
+        $query .= "ORDER BY start_date ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);

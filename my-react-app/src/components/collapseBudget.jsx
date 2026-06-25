@@ -121,8 +121,9 @@ export default function CollapseBudget() {
                             />
                         )}
 
+                        <div className = "inLine">
 
-
+                        <div>
                         <DataInput
                             label="data iniziale"
                             id="date_goal"
@@ -130,8 +131,10 @@ export default function CollapseBudget() {
                             value={getStartDate}
                             onChange={(e) => setStartDate(e.target.value)}
                             
-                        />
+                                />
+                            </div>
 
+                        <div>
                         <DataInput
                             label="data finale"
                             id="date_goal"
@@ -139,8 +142,10 @@ export default function CollapseBudget() {
                             value={getEndDate}
                             onChange={(e) => setEndDate(e.target.value)}
 
-                        />
+                                />
+                            </div>
 
+                        <div>
                         <Input
                             id="limit_amount"
                             type="number"
@@ -150,9 +155,10 @@ export default function CollapseBudget() {
                             onChange={(e) =>
                                 setLimit(e.target.value)
                             }
-                        />
+                                />
+                            </div>
 
-
+                        <div>
                         <Input
                             id="description_budet"
                             type="text"
@@ -162,7 +168,9 @@ export default function CollapseBudget() {
                             onChange={(e) =>
                                 setDescription(e.target.value)
                             }
-                        />
+                            />
+                            </div>
+                        </div> 
 
                         <div>
                             <Button

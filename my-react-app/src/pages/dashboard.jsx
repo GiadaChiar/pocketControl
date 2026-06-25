@@ -8,7 +8,7 @@ function DashBoard() {
     return (
         <>
             <Menu/>
-            <h1>Are you ready to cook?</h1>
+            <h1>Il tuo andamento finanziario</h1>
             <div id="green_background">
             
             </div>

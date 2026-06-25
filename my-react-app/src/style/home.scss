@@ -3,6 +3,8 @@
 #home_container {
     width: 100%;
     height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     background-image: url("../assets/city.jpeg"); // cambia path
     background-size: cover;
@@ -11,7 +13,6 @@
 
     display: flex;
     align-items: center;
-    overflow: hidden;
     justify-content: center;
 
     position: relative;

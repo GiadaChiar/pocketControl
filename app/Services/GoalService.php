@@ -60,7 +60,7 @@ class GoalService
     }
 
 
-    public function getAll($idUser)
+    public function getAll($idUser, $data=null)
     {
         try {
             //search by userID 
@@ -70,16 +70,17 @@ class GoalService
                 throw new \Exception("Utente non registrato correttamente, effettuare il login");
             }
 
-            $results = $this->goalModel->get($idUser);
+            $results = $this->goalModel->get($idUser, $data);
 
             if (empty($results)) {
                 throw new \Exception(",Nessun obbiettivo presente");
+                return null;
             }
             return $results;
         } catch (\Throwable $e) {
 
             throw new \Exception("Il rescupero,non è stato completato" . $e->getMessage());
-
+            return null;
             exit;
         }
     }

@@ -5,7 +5,7 @@ use App\Controllers\UserController;
 use App\Controllers\OperationController;
 use App\Controllers\GoalController;
 use App\Controllers\BudgetController;
-use APP\Controllers\FilterController;
+use App\Controllers\FilterController;
 
 
 
@@ -48,6 +48,7 @@ $router->delete('/api/budgets/{id}', [BudgetController::class, 'delete']);
 
 //GENERIC FILTERS
 $router->post('/api/filters', [FilterController::class, 'filters']);
+$router->post('/api/filters/delete', [FilterController::class, 'delete']);
 
 /*
 

@@ -57,7 +57,7 @@ class OperationService
     }
 
 
-    public function getAll(int $idUser,?string $field = null, ?string $value = null){
+    public function getAll(int $idUser, ?array $data = null, ?string $field = null, ?string $value = null){
         try {
             //search by userID 
             $existingUser = $this->userModel->findByField("id", $idUser);
@@ -65,15 +65,25 @@ class OperationService
             if (!$existingUser) {
                 throw new \Exception("Utente non registrato correttamente, effettuare il login");
             }
-        return $this->operationModel->get(
+
+        $results = $this->operationModel->get(
         $idUser,
+        $data,
         $field,
-        $value
-    );
+        $value,
+        );
+        
+        if(empty($results)){
+
+            throw new \Exception("Nessuna operazione trovata");
+        }
+
+        return $results;
+        
         } catch (\Throwable $e) {
 
-            throw new \Exception("Il rescupero,non è stato completato");
-
+            throw new \Exception($e->getMessage());
+            return null;
             exit;
         }
     }

@@ -5,11 +5,14 @@ import CollapseTransation from "../components/collapseTransation";
 import ShowTable from "../components/showTable";
 import Menu from "../components/menu";
 import "../style/menu.scss";
+import "../style/insert.scss";
+
 //recipe page 
 function Insert() {
     return (
         <>
             <Menu />
+            <div className="insert-page">
             <h1>Inserimenti e controlli</h1>
             <div id="collapses">
                 <CollapseGoald />
@@ -17,6 +20,7 @@ function Insert() {
                 <CollapseTransation />
                 <div id="filters_table">
                     <ShowTable/>
+                </div>
                 </div>
             </div>
         </>

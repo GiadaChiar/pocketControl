@@ -1,5 +1,6 @@
 
 import { searchFilter } from "../api/filterService";
+import { deleteElementTable } from "../api/filterService";
 
 export async function FiltersTable(
     tipology,
@@ -12,4 +13,17 @@ export async function FiltersTable(
         end_date
 
     });
+
 }
+
+
+export async function DeleteFilterTable(
+    id,
+    type
+) {
+    return await deleteElementTable({
+        id,
+        type
+    });
+}
+

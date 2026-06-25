@@ -123,7 +123,9 @@ export default function CollapseGoal() {
                         )}
 
 
+                        <div className="inLine">
 
+                        <div>
                         <DataInput
                             label="data"
                             id="date_goal"
@@ -131,12 +133,10 @@ export default function CollapseGoal() {
                             value={getDate}
                             onChange={(e) => setDate(e.target.value)}
                             
-                        />
+                                />
+                            </div>
 
-
-
-
-
+                        <div>
                         <Input
                             id="target_amount"
                             type="number"
@@ -146,8 +146,9 @@ export default function CollapseGoal() {
                             onChange={(e) =>
                                 setTarget(e.target.value)
                             }
-                        />
-
+                                />
+                            </div>
+                        <div>
                         <Input
                             id="current_amount"
                             type="number"
@@ -157,8 +158,9 @@ export default function CollapseGoal() {
                             onChange={(e) =>
                                 setCurrent(e.target.value)
                             }
-                        />
-
+                                />
+                            </div>
+                        <div>
                         <Input
                             id="description_goal"
                             type="text"
@@ -168,8 +170,10 @@ export default function CollapseGoal() {
                             onChange={(e) =>
                                 setDescription(e.target.value)
                             }
-                        />
-
+                                />
+                            </div>
+                        </div>
+                            
                         <div>
                             <Button
                                 id="btn_Goal"

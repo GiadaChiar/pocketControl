@@ -8,3 +8,13 @@ export function searchFilter(data) {
         body: JSON.stringify(data)
     });
 }
+
+
+export function deleteElementTable(data) {
+
+
+    return apiRequestToken("/api/filters/delete", {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+}
