@@ -77,7 +77,7 @@ export default function PieChar() {
         <>
 
 
-            <div className="graphic" id="PieChart">
+            <div className="graphic  dashboard-layout" id="PieChart">
 
                 {popup.visible && (
                     <PopUp
@@ -93,59 +93,61 @@ export default function PieChar() {
                     />
                 )}
 
-                
-                <div className="inLine">
-                <div className="chartWrapperBar">
-                    <h3 class="charTitle">Divisione delle spese o delle entrate per mese</h3>
-                    <PieChartWith data={chartData} />
-                </div>
 
+                <h3 className="charTitle">Divisione delle spese o delle entrate per mese</h3>
 
-                <div className="inLine">
-
-                <DropDown
-                    label="Tipologia"
-                    id="type_drop"
-                    options={[
-                        { label: "Entrate", value: "entrata" },
-                        { label: "Spese", value: "spesa" }
-                    ]}
-                    onSelect={(value) => setType(value)}
-                />
-
-                    <div>
-                        <DataInput
-                            label="data iniziale"
-                            id="date_goal"
-                            name="date_goal"
-                            value={getStartDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-
-                        />
+                <div className="chartSection">
+                    <div className="chartSide">
+                        <div className="chartWrapperBar">
+                            <PieChartWith data={chartData} />
+                        </div>
                     </div>
 
-                    <div>
-                        <DataInput
-                            label="data finale"
-                            id="date_goal"
-                            name="date_goal"
-                            value={getEndDate}
-                            onChange={(e) => setEndDate(e.target.value)}
+                    <div className="filterSide">
+                        <div className="inputsRow">
+                            <DataInput
+                                label="data iniziale"
+                                id="date_goal"
+                                name="date_goal"
+                                value={getStartDate}
+                                onChange={(e) => setStartDate(e.target.value)}
 
-                        />
+                            />
+
+                            <DataInput
+                                label="data finale"
+                                id="date_goal"
+                                name="date_goal"
+                                value={getEndDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+
+                            />
+                        </div>
+
+
+                        <div className="drop_chart">
+                            <DropDown
+                                label="Tipologia"
+                                id="type_drop"
+                                options={[
+                                    { label: "Entrate", value: "entrata" },
+                                    { label: "Spese", value: "spesa" }
+                                ]}
+                                onSelect={(value) => setType(value)}
+                            />
+                        </div>
+
+                        <div className="buttonRow">
+                            <Button
+                                id="btn_PieChart"
+                                className="buttonSend"
+                                label="Filtra"
+                                type="button"
+                                onClick={handlePieChar}
+                            />
+                        </div>
+
                     </div>
-
-
-                </div>
-                <div>
-                    <Button
-                        id="btn_PieChart"
-                        className="buttonSend"
-                        label="Filtra"
-                        type="button"
-                        onClick={handlePieChar}
-                    />
-                </div>
                 </div>
             </div>
         </>

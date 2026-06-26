@@ -47,6 +47,7 @@ class FilterController
 
             $data = json_decode(file_get_contents("php://input"), true);
 
+
         
             if($data["tipology"] === "goals" ){
                 $results = $this->goalService->getAll($userId, $data);

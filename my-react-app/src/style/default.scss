@@ -13,6 +13,8 @@
 
 .buttonSend{
             margin-bottom: 30px;
+            font-size: 15px;
+            max-width: 80px;
             color:vars.$color2;
             width: 150px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -35,7 +37,11 @@ h1{
         }
 
 .form-control{
-            max-width: 100%;
+            width: 100%;
+            font-size: vars.$font-size5;
+            max-width: 50px;
+            max-height: 50px;
+
         }
 
 .charTitle{
@@ -50,5 +56,9 @@ h1{
             .btn.btn-secondary.dropdown-toggle{
                 background-color: vars.$color3;
                 box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+                max-width: 200px;
+                font-size: 15px;
+                padding: 5px;
+
             }
         }

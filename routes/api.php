@@ -26,6 +26,8 @@ $router->get('/api/operations', [OperationController::class, 'showAll']);
 $router->get('/api/monthOperations', [OperationController::class, 'monthsOperations']);
 $router->get('/api/allExpense', [OperationController::class, 'expenses']);
 
+
+
 //$router->delete('/api/operations/{id}', [OperationController::class, 'delete']);
 
 

@@ -3,7 +3,6 @@
 #barchar_page{
         width: 100%;
         min-height: 100vh;
-        //background-image: url("../assets/insert.jpeg"); 
         font-family: vars.$font2;
 
     h1{
@@ -11,6 +10,7 @@
         text-shadow:
         2px -0.5px 0 vars.$color32;
         text-decoration: underline;
+        font-size: vars.$font-size3;
     }
 
     #graphic_section{
@@ -23,9 +23,171 @@
     //my bar chart 
     .chartWrapperBar{
         width: 100%;
-        max-width: 800px;
+        max-width: 1000px;
         
+    }
+
+
+    h3{
+        font-weight: vars.$font-size5;
+        color:vars.$color32;
+        
+    }
+
+
+    //divider
+    .divider-glow {
+        height: 10px;
+        width: 100%;
+        background: vars.$color1;
+        box-shadow: 0 0 80px vars.$color25;
+        margin: 28px 0;
+    }
+    
+    
+}
+
+
+
+//background
+.dashboard-bg {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(150deg, vars.$color1, vars.$color32);
+}
+
+.dashboard-bg::before,
+.dashboard-bg::after {
+    content: "";
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .30;
+    pointer-events: none;
+}
+
+.dashboard-bg::before {
+    background: vars.$color1;
+    top: -180px;
+    left: -120px;
+    animation: blob1 22s ease-in-out infinite alternate;
+}
+
+.dashboard-bg::after {
+    background: vars.$color5;
+    bottom: -220px;
+    right: -180px;
+    animation: blob2 26s ease-in-out infinite alternate;
+}
+
+
+
+//pie section 
+.dashboard-layout {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* titolo centrato */
+.centerTitle {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+/* contenitore principale */
+.chartSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap; // fondamentale per responsive
+    padding: 20px;
+}
+
+/* SINISTRA (grafico) */
+.chartSide {
+    flex: 1 1 500px;
+    display: flex;
+    justify-content: center;
+}
+
+/* contenitore grafico */
+.chartWrapperBar {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* DESTRA (form) */
+.filterSide {
+    flex: 1 1 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 2 input affiancati */
+.inputsRow {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; // se non ci sta vanno uno sotto l'altro
+}
+
+.inputsRow > * {
+    flex: 1 1 140px;
+}
+
+/* dropdown */
+.dropdownRow {
+    width: 100%;
+
+}
+
+/* button */
+.buttonRow {
+    display: flex;
+    gap:20px;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+/* bottone coerente */
+.buttonSend {
+    width: 100%;
+    min-width: 100px;
+    max-width: 200px;
+    gap: 10px 30px;
+}
+
+
+
+//goals section 
+
+.goalsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+@keyframes blob1 {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(70px, 40px) scale(1.15);
     }
 }
 
+@keyframes blob2 {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(-60px, -30px) scale(1.1);
+    }
+}
  

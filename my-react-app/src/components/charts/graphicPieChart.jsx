@@ -1,19 +1,12 @@
 import { Pie, PieChart, Tooltip,Cell, Legend, Sector, useActiveTooltipDataPoints, useIsTooltipActive, } from 'recharts';
 
 
-// #region Sample data
-/*const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-];*/
 
 
 
 // #endregion
 const RADIAN = Math.PI / 180;
-const COLORS = ['rgba(87, 159, 213, 0.9)', 'rgb(77, 154, 85, 0.8)', 'rgba(131, 54, 61, 0.8)', 'rgb(206, 211, 98,0.8)', 'rgba(226, 80, 143, 0.9)'];
+const COLORS = ['rgba(87, 159, 213, 0.9)', 'rgb(77, 154, 85, 0.8)', 'rgba(131, 54, 61, 0.8)', 'rgb(206, 211, 98,0.8)', 'rgba(226, 180, 80, 0.9)'];
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
     if (cx == null || cy == null || innerRadius == null || outerRadius == null) {

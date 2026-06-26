@@ -1,6 +1,7 @@
-import { insertTransaction } from "../api/transactionApi";
-import { filterBarChar } from "../api/transactionApi";
-import { filterPieChar } from "../api/transactionApi";
+
+import { insertTransaction, filterBarChar, filterPieChar } from "../api/transactionApi";
+import { searchFilter } from "../api/filterService";
+
 
 
 export async function NewTransation(
@@ -34,11 +35,24 @@ export async function BarCharDate(
 
 export async function PieCharDate(start_date,
     end_date,
-    type
+    typology
 ) {
     return await filterPieChar({
         start_date,
         end_date,
-        type
+        typology
+    })
+}
+
+
+export async function NeedleChar(
+    start_date,
+    end_date,
+    tipology
+) {
+    return await searchFilter({
+        start_date,
+        end_date,
+        tipology
     })
 }

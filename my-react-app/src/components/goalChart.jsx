@@ -1,14 +1,14 @@
 import DataInput from "./datainput";
 import PopUp from "./popUp";
 import Button from "./button";
-import SimpleBarChart from "./charts/graphicBarChar";
+import RadialChart from "./charts/graphicRadialChart";
 import "../style/popUp.scss";
 import { useState, useEffect } from "react";
-import { BarCharDate } from "../services/transactionService";
-import { formatChartData } from "../function/FormatData";
+import { NeedleChar } from "../services/transactionService";
+//import { formatPieData } from "../function/FormatData";
 
 
-export default function BarChar() {
+export default function GoalChar() {
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");
     const [chartData, setChartData] = useState([]);
@@ -33,7 +33,8 @@ export default function BarChar() {
                 return
             }
 
-            const res = await BarCharDate(start, end);
+
+            const res = await NeedleChar(start, end, "goals");
 
             if (res.success === false) {
                 setPopup({
@@ -44,8 +45,10 @@ export default function BarChar() {
                 return;
             }
 
-            const formatted = formatChartData(res.data || []);
-            setChartData(formatted);
+            /*const formatted = formatPieData(res.data || []);
+            setChartData(formatted);*/
+
+            setChartData(res.date);
 
         } catch {
             setPopup({
@@ -66,7 +69,7 @@ export default function BarChar() {
 
 
     //if I click filter 
-    const handleBarChar = () => {
+    const handleGoalChar = () => {
         loadChart(getStartDate, getEndDate);
     };
 
@@ -75,7 +78,7 @@ export default function BarChar() {
         <>
 
 
-            <div className="graphic" id="BarChart">
+            <div className="graphic" id="GoalsChart">
 
                 {popup.visible && (
                     <PopUp
@@ -91,17 +94,28 @@ export default function BarChar() {
                     />
                 )}
 
+                
+                <div className="inLine">
                 <div className="chartWrapperBar">
-                    <h3 className ="charTitle">Entrate e spense mensili e ricavato</h3>
-                <SimpleBarChart data={chartData} />
+                    <h3 className ="charTitle">Visione degli obbiettivi di questo mese</h3>
+                        <div className="goalsContainer">
+                            {chartData.map((goal, index) => (
+                                <RadialChart
+                                    key={goal.id ?? index}
+                                    result={goal}
+                                />
+                            ))}
+                        </div>
                 </div>
 
+
                 <div className="inLine">
+
 
                     <div>
                         <DataInput
                             label="data iniziale"
-                            id="date_goal"
+                            id="date_Piegoal"
                             name="date_goal"
                             value={getStartDate}
                             onChange={(e) => setStartDate(e.target.value)}
@@ -112,7 +126,7 @@ export default function BarChar() {
                     <div>
                         <DataInput
                             label="data finale"
-                            id="date_goal"
+                            id="date_Piegoal"
                             name="date_goal"
                             value={getEndDate}
                             onChange={(e) => setEndDate(e.target.value)}
@@ -124,12 +138,13 @@ export default function BarChar() {
                 </div>
                 <div>
                     <Button
-                        id="btn_BurChart"
+                        id="btn_GoalChart"
                         className="buttonSend"
                         label="Filtra"
                         type="button"
-                        onClick={handleBarChar}
+                        onClick={handleGoalChar}
                     />
+                </div>
                 </div>
             </div>
         </>
