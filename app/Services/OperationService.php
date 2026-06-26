@@ -111,4 +111,67 @@ class OperationService
         return $categories;
     } 
 
+
+    public function monthOperations(int $idUser, ?string $start_date = null, ?string $end_date = null ){
+
+        try {
+            //search by userID 
+            $existingUser = $this->userModel->findByField("id", $idUser);
+
+            if (!$existingUser) {
+                throw new \Exception("Utente non registrato correttamente, effettuare il login");
+            }
+
+            $results = $this->operationModel->getMonthOperation(
+                $idUser,
+                $start_date,
+                $end_date
+            );
+
+            if (empty($results)) {
+
+                throw new \Exception("Nessuna operazione trovata");
+            }
+
+            return $results;
+        } catch (\Throwable $e) {
+
+            throw new \Exception($e->getMessage());
+            return null;
+            exit;
+        }
+    }
+
+
+
+    public function allExpenses(int $idUser,string $type, ?string $start_date = null, ?string $end_date = null){
+        try {
+            //search by userID 
+            $existingUser = $this->userModel->findByField("id", $idUser);
+
+            if (!$existingUser) {
+                throw new \Exception("Utente non registrato correttamente, effettuare il login");
+            }
+
+            $results = $this->operationModel->geAllExpenses(
+                $idUser,
+                $type,
+                $start_date,
+                $end_date
+            );
+
+            if (empty($results)) {
+
+                throw new \Exception("Nessuna operazione trovata");
+            }
+
+            return $results;
+        } catch (\Throwable $e) {
+
+            throw new \Exception($e->getMessage());
+            return null;
+            exit;
+        }
+    }
+
 }

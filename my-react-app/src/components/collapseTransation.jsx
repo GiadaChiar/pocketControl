@@ -1,7 +1,7 @@
 import Input from "./input";
 import Button from "./button";
 import DataInput from "./datainput";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import PopUp from "../components/popUp";
 import DropDown from "../components/dropdown";
 //import { validationInput } from "../function/Validation";
@@ -53,12 +53,12 @@ export default function CollapseTransation() {
                 });
             }
         }
-                loadCategories();
-            }, []);
+        loadCategories();
+    }, []);
 
 
     const handleTransection = async () => {
-        if (!getAmount|| !getType || !getDate) {
+        if (!getAmount || !getType || !getDate) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
@@ -67,10 +67,10 @@ export default function CollapseTransation() {
             return;
         }
 
-      /*  console.log("taget", getTarget);
-        console.log("current", getCurrent);
-        console.log("description", getDescription);
-        console.log("date", getDate);*/
+        /*  console.log("taget", getTarget);
+          console.log("current", getCurrent);
+          console.log("description", getDescription);
+          console.log("date", getDate);*/
 
         const categoryToSave =
             getCategory === "custom"
@@ -150,79 +150,79 @@ export default function CollapseTransation() {
                         )}
 
                         <div className="inLine">
-                        <DropDown
-                            label="Tipologia"
-                            id="type_drop"
-                            options={[
-                                { label: "Entrata", value: "entrata" },
-                                { label: "Spesa", value: "spesa" }
-                            ]}
-                            onSelect={(value) => setType(value)}
-                        />
-
-                        <DropDown
-                            label="Categoria"
-                            id="category_drop"
-                            options={[
-                                ...categories.map(cat => ({
-                                    label: cat.category,
-                                    value: cat.category
-                                })),
-                                {
-                                    label: "➕ Nuova categoria",
-                                    value: "custom"
-                                }
-                            ]}
-                            onSelect={(value) => setCategory(value)}
-                        />
-
-
-                        {getCategory === "custom" && (
-                            <Input
-                                id="custom_type"
-                                type="text"
-                                placeholder="Inserisci tipologia personalizzata"
-                                id_span="custom_span"
-                                text_span="Altro"
-                                onChange={(e) => setCustomCategory(e.target.value)}
+                            <DropDown
+                                label="Tipologia"
+                                id="type_drop"
+                                options={[
+                                    { label: "Entrata", value: "entrata" },
+                                    { label: "Spesa", value: "spesa" }
+                                ]}
+                                onSelect={(value) => setType(value)}
                             />
+
+                            <DropDown
+                                label="Categoria"
+                                id="category_drop"
+                                options={[
+                                    ...categories.map(cat => ({
+                                        label: cat.category,
+                                        value: cat.category
+                                    })),
+                                    {
+                                        label: "➕ Nuova categoria",
+                                        value: "custom"
+                                    }
+                                ]}
+                                onSelect={(value) => setCategory(value)}
+                            />
+
+
+                            {getCategory === "custom" && (
+                                <Input
+                                    id="custom_type"
+                                    type="text"
+                                    placeholder="Inserisci tipologia personalizzata"
+                                    id_span="custom_span"
+                                    text_span="Altro"
+                                    onChange={(e) => setCustomCategory(e.target.value)}
+                                />
                             )}
                         </div>
 
                         <div className="inLine">
-                        <div>
-                        <Input
-                            id="amount"
-                            type="number"
-                            placeholder="1500,75"
-                            id_span="amount_span"
-                            text_span="Cifra"
-                            onChange={(e) =>
-                                setAmount(e.target.value)
-                            }
+                            <div>
+                                <Input
+                                    id="amount"
+                                    type="number"
+                                    placeholder="1500,75"
+                                    id_span="amount_span"
+                                    text_span="Cifra"
+                                    onChange={(e) =>
+                                        setAmount(e.target.value)
+                                    }
                                 />
                             </div>
-                        <div>
-                        <DataInput
-                            label="data"
-                            id="date_transation"
-                            name="date_transation"
-                            value={getDate}
-                            onChange={(e) => setDate(e.target.value)}
-                            
+                            <div>
+                                <DataInput
+                                    label="data"
+                                    id="date_transation"
+                                    name="date_transation"
+                                    value={getDate}
+                                    onChange={(e) => setDate(e.target.value)}
+
                                 />
                             </div>
-                        <div>
-                        <Input
-                            id="description"
-                            type="text"
-                            placeholder="pizzata di classe"
-                            id_span="description_span"
-                            text_span="Descrizione*"
-                            onChange={(e) =>
-                                setDescription(e.target.value)
-                            }
-                            />
+                            <div>
+                                <Input
+                                    id="description"
+                                    type="text"
+                                    placeholder="pizzata di classe"
+                                    id_span="description_span"
+                                    text_span="Descrizione*"
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
+                                />
                             </div>
                         </div>
 
@@ -239,7 +239,7 @@ export default function CollapseTransation() {
                 </form>
             </div>
 
-                    </>
-                    )
+        </>
+    )
 
 }

@@ -6,7 +6,7 @@
         background-image: url("../assets/insert.jpeg"); 
         font-family: vars.$font1;
         overflow-y: auto;
-        overflow-x: hidden;
+        //overflow-x: hidden;
 
 
         .btn.btn-primary{
@@ -20,7 +20,7 @@
             font-weight: 600;
             
         }
-
+/*
         .inLine{
                 display: flex;
                 flex-wrap: wrap;
@@ -57,13 +57,14 @@
                 color:vars.$color25;
         }
 
+
         .dropdown{
             .btn.btn-secondary.dropdown-toggle{
                 background-color: vars.$color3;
                 box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             }
         }
-
+*/
         #filter{
             margin-top: 50px;
             h3{

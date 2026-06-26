@@ -31,7 +31,7 @@ export default function CollapseBudget() {
             return;
         }
 
-        if (new Date (getEndDate) < new Date (getStartDate)) {
+        if (new Date(getEndDate) < new Date(getStartDate)) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
@@ -56,22 +56,22 @@ export default function CollapseBudget() {
 
             );
 
-                if (user.success === false) {
-                    setPopup({
-                        visible: true,
-                        alert: "Attenzione",
-                        message: user.error,
-                    });
-                }
-                if (user.success === true) {
-                    setPopup({
-                        visible: true,
-                        alert: "Registrazione eseguita",
-                        message: "Budget inserito"
-                    });
-                    return;
-                }
-            
+            if (user.success === false) {
+                setPopup({
+                    visible: true,
+                    alert: "Attenzione",
+                    message: user.error,
+                });
+            }
+            if (user.success === true) {
+                setPopup({
+                    visible: true,
+                    alert: "Registrazione eseguita",
+                    message: "Budget inserito"
+                });
+                return;
+            }
+
         } catch {
             setPopup({
                 visible: true,
@@ -121,56 +121,56 @@ export default function CollapseBudget() {
                             />
                         )}
 
-                        <div className = "inLine">
+                        <div className="inLine">
 
-                        <div>
-                        <DataInput
-                            label="data iniziale"
-                            id="date_goal"
-                            name="date_goal"
-                            value={getStartDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                            
-                                />
-                            </div>
-
-                        <div>
-                        <DataInput
-                            label="data finale"
-                            id="date_goal"
-                            name="date_goal"
-                            value={getEndDate}
-                            onChange={(e) => setEndDate(e.target.value)}
+                            <div>
+                                <DataInput
+                                    label="data iniziale"
+                                    id="date_goal"
+                                    name="date_goal"
+                                    value={getStartDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
 
                                 />
                             </div>
 
-                        <div>
-                        <Input
-                            id="limit_amount"
-                            type="number"
-                            placeholder="800"
-                            id_span="limit_amount_span"
-                            text_span="Budget"
-                            onChange={(e) =>
-                                setLimit(e.target.value)
-                            }
+                            <div>
+                                <DataInput
+                                    label="data finale"
+                                    id="date_goal"
+                                    name="date_goal"
+                                    value={getEndDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+
                                 />
                             </div>
 
-                        <div>
-                        <Input
-                            id="description_budet"
-                            type="text"
-                            placeholder="budget vacanze"
-                            id_span="description_budget_span"
-                            text_span="Descrizione*"
-                            onChange={(e) =>
-                                setDescription(e.target.value)
-                            }
-                            />
+                            <div>
+                                <Input
+                                    id="limit_amount"
+                                    type="number"
+                                    placeholder="800"
+                                    id_span="limit_amount_span"
+                                    text_span="Budget"
+                                    onChange={(e) =>
+                                        setLimit(e.target.value)
+                                    }
+                                />
                             </div>
-                        </div> 
+
+                            <div>
+                                <Input
+                                    id="description_budet"
+                                    type="text"
+                                    placeholder="budget vacanze"
+                                    id_span="description_budget_span"
+                                    text_span="Descrizione*"
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
+                                />
+                            </div>
+                        </div>
 
                         <div>
                             <Button

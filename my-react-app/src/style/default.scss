@@ -1,0 +1,54 @@
+@use 'variables.scss' as vars;
+
+
+
+.inLine{
+                display: flex;
+                flex-wrap: wrap;
+                gap:10px 50px;
+                align-items: center;
+                justify-content:center;
+                margin: 30px;
+        }
+
+.buttonSend{
+            margin-bottom: 30px;
+            color:vars.$color2;
+            width: 150px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15%;
+            border-style:double;
+            border-color: vars.$color2;
+            background: vars.$color5;
+            &:hover{
+                background-color: vars.$color3;
+            }
+        }
+
+h1{
+            text-shadow:
+                -1px -1px 0 vars.$color1;
+                margin-bottom: 50px;
+                margin-top: 90px;
+                font-weight: 800;
+                color:vars.$color25;
+        }
+
+.form-control{
+            max-width: 100%;
+        }
+
+.charTitle{
+    color:vars.$color25;
+    text-shadow:
+    -1px -1px 0 vars.$color3;
+    font-family: vars.$font1;
+    font-weight: 700;
+}
+
+.dropdown{
+            .btn.btn-secondary.dropdown-toggle{
+                background-color: vars.$color3;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            }
+        }

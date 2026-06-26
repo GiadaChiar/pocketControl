@@ -122,4 +122,85 @@ class OperationModel
 
 
 
+    public function getMonthOperation(int $idUser, ?string $start_date=null, ?string $end_date= null){
+
+        $query = "
+        SELECT
+        YEAR(date) AS year,
+        MONTH(date) AS month,
+        type,
+        SUM(amount) AS total
+        FROM pocket.transactions
+        WHERE user_id = :user_id
+        ";
+
+
+        $params = [
+            ":user_id" => $idUser
+        ];
+
+        if(!empty($start_date) && !empty($end_date)){
+
+        $query .= " AND date BETWEEN :start_date AND :end_date";
+
+
+        $params[':start_date'] = $start_date;
+        $params[':end_date'] = $end_date;
+        }
+
+        $query .=" GROUP BY YEAR(date), MONTH(date), type
+        ORDER BY YEAR(date), MONTH(date);";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+
+
+    public function geAllExpenses(int $idUser,string $type, ?string $start_date = null, ?string $end_date = null){
+        $query = "
+        SELECT category,
+        SUM(amount)  AS total
+        FROM pocket.transactions 
+        WHERE type = :type
+        and user_id = :user_id
+        ";
+
+        $params = [
+            ":user_id" => $idUser,
+            ":type" => $type
+        ];
+
+        if (!empty($start_date) && !empty($end_date)) {
+            $query .= " AND date BETWEEN :start_date AND :end_date";
+
+            $params[':start_date'] = $start_date;
+            $params[':end_date'] = $end_date;
+        }else{
+            $query .= "
+             AND date >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
+            AND date <  DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH)
+            ";
+        }
+
+        $query .= " GROUP BY category";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+
+
+    
+
+
+
 }

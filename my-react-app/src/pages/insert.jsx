@@ -6,6 +6,7 @@ import ShowTable from "../components/showTable";
 import Menu from "../components/menu";
 import "../style/menu.scss";
 import "../style/insert.scss";
+import "../style/default.scss";
 
 //recipe page 
 function Insert() {

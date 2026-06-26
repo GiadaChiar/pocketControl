@@ -23,7 +23,10 @@ $router->post('/api/auth/register', [UserController::class, 'registration']);
 $router->post('/api/operations', [OperationController::class, 'insert']);
 //pass token into headers
 $router->get('/api/operations', [OperationController::class, 'showAll']);
-$router->delete('/api/operations/{id}', [OperationController::class, 'delete']);
+$router->get('/api/monthOperations', [OperationController::class, 'monthsOperations']);
+$router->get('/api/allExpense', [OperationController::class, 'expenses']);
+
+//$router->delete('/api/operations/{id}', [OperationController::class, 'delete']);
 
 
 //CATEGORIES
@@ -36,14 +39,14 @@ $router->get('/api/categories', [OperationController::class, 'categories']);
 //GOALS
 $router->get('/api/goals', [GoalController::class, 'showAll']);
 $router->post('/api/goals', [GoalController::class, 'insert']);
-$router->delete('/api/goals/{id}', [GoalController::class, 'delete']);
+//$router->delete('/api/goals/{id}', [GoalController::class, 'delete']);
 
 
 
 //BUDGETS
 $router->post('/api/budgets', [BudgetController::class, 'insert']);
 $router->get('/api/budgets', [BudgetController::class, 'showAll']);
-$router->delete('/api/budgets/{id}', [BudgetController::class, 'delete']);
+//$router->delete('/api/budgets/{id}', [BudgetController::class, 'delete']);
 
 
 //GENERIC FILTERS

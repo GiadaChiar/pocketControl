@@ -57,22 +57,22 @@ export default function CollapseGoal() {
 
             );
 
-                if (user.success === false) {
-                    setPopup({
-                        visible: true,
-                        alert: "Attenzione",
-                        message: user.error,
-                    });
-                }
-                if (user.success === true) {
-                    setPopup({
-                        visible: true,
-                        alert: "Registrazione eseguita",
-                        message: "Obbiettivo inserito"
-                    });
-                    return;
-                }
-            
+            if (user.success === false) {
+                setPopup({
+                    visible: true,
+                    alert: "Attenzione",
+                    message: user.error,
+                });
+            }
+            if (user.success === true) {
+                setPopup({
+                    visible: true,
+                    alert: "Registrazione eseguita",
+                    message: "Obbiettivo inserito"
+                });
+                return;
+            }
+
         } catch {
             setPopup({
                 visible: true,
@@ -125,55 +125,55 @@ export default function CollapseGoal() {
 
                         <div className="inLine">
 
-                        <div>
-                        <DataInput
-                            label="data"
-                            id="date_goal"
-                            name="date_goal"
-                            value={getDate}
-                            onChange={(e) => setDate(e.target.value)}
-                            
+                            <div>
+                                <DataInput
+                                    label="data"
+                                    id="date_goal"
+                                    name="date_goal"
+                                    value={getDate}
+                                    onChange={(e) => setDate(e.target.value)}
+
                                 />
                             </div>
 
-                        <div>
-                        <Input
-                            id="target_amount"
-                            type="number"
-                            placeholder="1500,75"
-                            id_span="target_amount_span"
-                            text_span="Obbiettivo"
-                            onChange={(e) =>
-                                setTarget(e.target.value)
-                            }
+                            <div>
+                                <Input
+                                    id="target_amount"
+                                    type="number"
+                                    placeholder="1500,75"
+                                    id_span="target_amount_span"
+                                    text_span="Obbiettivo"
+                                    onChange={(e) =>
+                                        setTarget(e.target.value)
+                                    }
                                 />
                             </div>
-                        <div>
-                        <Input
-                            id="current_amount"
-                            type="number"
-                            placeholder="500"
-                            id_span="current_amount_span"
-                            text_span="Soldi di partenza"
-                            onChange={(e) =>
-                                setCurrent(e.target.value)
-                            }
+                            <div>
+                                <Input
+                                    id="current_amount"
+                                    type="number"
+                                    placeholder="500"
+                                    id_span="current_amount_span"
+                                    text_span="Soldi di partenza"
+                                    onChange={(e) =>
+                                        setCurrent(e.target.value)
+                                    }
                                 />
                             </div>
-                        <div>
-                        <Input
-                            id="description_goal"
-                            type="text"
-                            placeholder="pizzata di classe"
-                            id_span="description_goal_span"
-                            text_span="Descrizione*"
-                            onChange={(e) =>
-                                setDescription(e.target.value)
-                            }
+                            <div>
+                                <Input
+                                    id="description_goal"
+                                    type="text"
+                                    placeholder="pizzata di classe"
+                                    id_span="description_goal_span"
+                                    text_span="Descrizione*"
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
                                 />
                             </div>
                         </div>
-                            
+
                         <div>
                             <Button
                                 id="btn_Goal"

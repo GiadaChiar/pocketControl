@@ -229,6 +229,129 @@ class OperationController
     }
 
 
+    
+    public function monthsOperations(){
+        try{
+
+            header('Content-Type: application/json');
+            $headers = getallheaders();
+
+            $authHeader = $headers['Authorization'] ?? null;
+
+            if (!$authHeader) {
+                http_response_code(401);
+
+                echo json_encode([
+                    "success" => false,
+                    "type" => "transaction",
+                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                ]);
+                exit;
+            }
+
+            $token = str_replace('Bearer ', '', $authHeader);
+
+            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+
+            $userId = $decoded->user_id;
+
+            //optional filter 
+            $start_date= $_GET['start_date'] ?? null;
+            $end_date =  $_GET['end_date'] ?? null;
+            
+            if($start_date && $end_date){
+                $results = $this->operationService->monthOperations($userId,$start_date,$end_date);
+            }else{
+                $results = $this->operationService->monthOperations($userId);
+            }
+
+            if ($results) {
+                http_response_code(200);
+
+                echo json_encode([
+                    "success" => true,
+                    "data" => $results
+                ]);
+                exit;
+            }
+        } catch (\Throwable $e) {
+
+            http_response_code(401);
+
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+            exit;
+        }
+    }
+
+
+
+    public function expenses(){
+        try {
+
+            header('Content-Type: application/json');
+            $headers = getallheaders();
+
+            $authHeader = $headers['Authorization'] ?? null;
+
+            if (!$authHeader) {
+                http_response_code(401);
+
+                echo json_encode([
+                    "success" => false,
+                    "type" => "transaction",
+                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                ]);
+                exit;
+            }
+
+            $token = str_replace('Bearer ', '', $authHeader);
+
+            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+
+            $userId = $decoded->user_id;
+
+            //optional filter 
+            $start_date = $_GET['start_date'] ?? null;
+            $end_date =  $_GET['end_date'] ?? null;
+            $type = $_GET['type'] ?? null;
+
+            //default spesa
+
+            if($type){
+                if ($start_date && $end_date) {
+                    $results = $this->operationService->allExpenses($userId, $type,$start_date, $end_date);
+                }else{
+                    $results = $this->operationService->allExpenses($userId,$type);
+                }
+            }else{
+                $results = $this->operationService->allExpenses($userId, "spesa");
+            }
+
+            if ($results) {
+                http_response_code(200);
+
+                echo json_encode([
+                    "success" => true,
+                    "data" => $results
+                ]);
+                exit;
+            }
+        } catch (\Throwable $e) {
+
+            http_response_code(401);
+
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+            exit;
+        }
+    }
+
+
 
 
 
