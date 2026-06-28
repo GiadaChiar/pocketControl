@@ -6,7 +6,7 @@ import { Pie, PieChart, Tooltip,Cell, Legend, Sector, useActiveTooltipDataPoints
 
 // #endregion
 const RADIAN = Math.PI / 180;
-const COLORS = ['rgba(87, 159, 213, 0.9)', 'rgb(77, 154, 85, 0.8)', 'rgba(131, 54, 61, 0.8)', 'rgb(206, 211, 98,0.8)', 'rgba(226, 180, 80, 0.9)'];
+const COLORS = ['#22c55e', '#ef4444', '#FBBF24', 'rgb(206, 211, 98,0.8)', 'rgba(226, 80, 170, 0.9)', '#3b82f6'];
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
     if (cx == null || cy == null || innerRadius == null || outerRadius == null) {

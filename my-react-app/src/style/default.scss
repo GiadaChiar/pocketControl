@@ -47,6 +47,27 @@ h1{
     font-weight: 700;
 }
 
+.titleTable{
+    margin-top: 70px;
+}
+
+#titleBuget,#titleTableDash,#titleGoal{
+    margin-top: 30px;
+}
+
+#titleBuget{
+    margin-bottom: 40px;
+}
+
+#titleGoal{
+    margin-bottom: -30px;
+}
+
+#titleTableDash {
+    margin-bottom: 70px;
+}
+
+
 .dropdown{
             .btn.btn-secondary.dropdown-toggle{
                 background-color: vars.$color3;

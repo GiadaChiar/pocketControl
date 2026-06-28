@@ -24,10 +24,14 @@ function DashBoard() {
                         <div className="divider-glow"></div>
                         <PieChar />
                         <div className="divider-glow"></div>
-                    <GoalChar />
+                        <GoalChar />
+                        <div className="divider-glow"></div>
                         <BudgetChar />
                         <div className="divider-glow"></div>
-                    <ShowTable />
+                        <div id ="charTable">
+                        <h3 id="titleTableDash" className="ChartH3">Cerca gli inserimenti</h3>
+                        <ShowTable />
+                        </div>
             </div>
             </div>
             </div>

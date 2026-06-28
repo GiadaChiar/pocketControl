@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-//import "../style/menu.scss";
+import { useNavigate } from "react-router-dom";
 
-//dynamic menu + change text in base of window screen
+
 
 
 function Menu() {
+
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/login");
+    };
 
     //logic to change text in base of width of the display
     const [isSmall, setSmall] = useState(window.innerWidth < 500) //display < 500 true
@@ -89,6 +99,11 @@ function Menu() {
                                     <Link className="nav-link" to="/insert">
                                         Inserimenti
                                     </Link>
+                                </li>
+                                <li className="nav-item out">
+                                    <button className="nav-link btn btn-link" data-bs-dismiss="offcanvas" onClick={handleLogout} >
+                                        Esci
+                                    </button>
                                 </li>
                             </ul>
                         </div>

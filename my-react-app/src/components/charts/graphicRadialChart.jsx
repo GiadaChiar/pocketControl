@@ -16,10 +16,10 @@ export default function RadialChart({ result }) {
 
     
     const getColor = (p) => {
-        if (p < 35) return "rgba(131, 54, 61, 0.8)";
-        if (p < 53) return "rgba(226, 180, 80, 0.9)";
+        if (p < 35) return "#ef4444";
+        if (p < 53) return "#FBBF24";
         if (p < 85) return "rgba(162, 189, 44, 0.9)";
-        if (p >= 85) return "rgba(77, 154, 85, 0.8)";
+        if (p >= 85) return "#22c55e";
         return "rgba(77, 154, 85, 0.85)";
     };
 

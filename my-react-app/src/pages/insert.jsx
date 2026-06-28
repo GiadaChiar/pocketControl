@@ -19,7 +19,8 @@ function Insert() {
                 <CollapseGoald />
                 <CollapseBudget/>
                 <CollapseTransation />
-                <div id="filters_table">
+                    <div id="filters_table">
+                    <h3 className ="titleTable">Cerca ed elimina gli inserimenti</h3>
                     <ShowTable/>
                 </div>
                 </div>

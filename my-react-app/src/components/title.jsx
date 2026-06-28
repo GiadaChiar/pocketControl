@@ -2,12 +2,12 @@
 
 
 
-export default function Title({ classname, id, text }
+export default function Title({ className, id, text }
 ) {
     return (
         <h1
             id={id}
-            className={classname}>
+            className={className}>
             {text}
         </h1>
     );

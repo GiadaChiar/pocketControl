@@ -29,12 +29,6 @@
     }
 
 
-    h3{
-        font-weight: vars.$font-size5;
-        color:vars.$color32;
-        
-    }
-
 
     //divider
     .divider-glow {
@@ -45,6 +39,16 @@
         margin: 28px 0;
     }
     
+    .ChartH3{
+        align-items: center;
+        color:vars.$color25;
+        text-shadow:
+    -1px -1px 0 vars.$color3;
+    font-family: vars.$font1;
+    font-weight: 600;
+    
+
+    }
     
 }
 
@@ -192,7 +196,24 @@ svg {
 }
 
 
+//table section
+#charTable{
 
+
+    .table{
+        margin-bottom:30px ;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        border-radius: 5%;
+    
+    .btn.btn-danger.btn-sm {
+        display: none;
+        pointer-events: none;
+        
+    }
+}
+
+
+}
 
 
 

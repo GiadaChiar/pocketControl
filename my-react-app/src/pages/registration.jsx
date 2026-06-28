@@ -67,9 +67,22 @@ export default function Registration() {
                     });
                     if (user.data) {
                         localStorage.setItem("token", user.data);
+
+                        setPopup({
+                            visible: true,
+                            alert: "Login effettuato",
+                            message: "Benvenuto"
+                        });
+
+                        setTimeout(() => {
+                            navigate("/dashboard");
+                        }, 1200); // 1.2 secondi
+                    }
+                    /*if (user.data) {
+                        localStorage.setItem("token", user.data);
                         navigate("/dashboard")
 
-                    }
+                    }*/
                     return;
                 }
             }

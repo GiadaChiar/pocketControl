@@ -72,14 +72,14 @@ export default function BudgetLinearChart({result}) {
                     {/* budget base (sfondo) */}
                     <Bar
                         dataKey="budget"
-                        fill="rgb(206, 211, 98,0.8)"
+                        fill="#FBBF24"
                         barSize={25}
                     />
 
                     {/* spesa reale */}
                     <Bar
                         dataKey="speso"
-                        fill="rgba(131, 54, 61, 0.8)"
+                        fill="#ef4444"
                         barSize={25}
                     />
 

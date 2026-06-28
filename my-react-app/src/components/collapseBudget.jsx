@@ -15,6 +15,7 @@ export default function CollapseBudget() {
     const [getEndDate, setEndDate] = useState("");
     const [getLimit, setLimit] = useState("");
     const [getDescription, setDescription] = useState("");
+    
     const [popup, setPopup] = useState({
         visible: false,
         alert: "",
@@ -69,6 +70,7 @@ export default function CollapseBudget() {
                     alert: "Registrazione eseguita",
                     message: "Budget inserito"
                 });
+                
                 return;
             }
 

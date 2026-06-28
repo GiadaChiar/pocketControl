@@ -228,8 +228,14 @@ class BudgetController
                 ];
                 $results = $this->budgetService->getBudgetSummary($userId, $filter);
             }else{
-                
-                $results = $this->budgetService->getBudgetSummary($userId);
+
+                http_response_code(401);
+
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Renge non caricato"
+                ]);
+                exit;
             }
 
 

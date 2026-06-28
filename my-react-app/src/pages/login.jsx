@@ -57,11 +57,18 @@ export function LogIn() {
                     alert: "Registrazione eseguita",
                     message: "Bentornato"
                 });
-                if (user.data) {
-                    localStorage.setItem("token", user.data);
-                    console.log("TOKEN SALVATO:", user.data);
-                    navigate("/dashboard")
+                if (user.token && user.name) {
+                    localStorage.setItem("token", user.token);
 
+                    setPopup({
+                        visible: true,
+                        alert: "Login effettuato",
+                        message: `Che piacere rivederti, ${user.name}`
+                    });
+
+                    setTimeout(() => {
+                        navigate("/dashboard");
+                    }, 1200); // 1.2 secondi
                 }
                 return;
                 //}
@@ -79,6 +86,19 @@ export function LogIn() {
         <>
             <Menu />
             <div className="user-page">
+                {popup.visible && (
+                    <PopUp
+                        alert={popup.alert}
+                        message={popup.message}
+                        onClose={() =>
+                            setPopup({
+                                visible: false,
+                                alert: "",
+                                message: ""
+                            })
+                        }
+                    />
+                )}
 
                 <div className="over">
                     <Title
@@ -88,20 +108,6 @@ export function LogIn() {
                     />
 
                     <h2 className="title2">Bentornato!</h2>
-
-                    {popup.visible && (
-                        <PopUp
-                            alert={popup.alert}
-                            message={popup.message}
-                            onClose={() =>
-                                setPopup({
-                                    visible: false,
-                                    alert: "",
-                                    message: ""
-                                })
-                            }
-                        />
-                    )}
 
                     <div id="input_login" className="inLine">
                         <div>

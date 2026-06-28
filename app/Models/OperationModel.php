@@ -64,10 +64,18 @@ class OperationModel
             ":user_id" => $idUser
         ];
 
-    if ($field && $value){
+
+        $allowedFields = ['type', 'category'];
+
+        if ($field && in_array($field, $allowedFields)) {
+            $query .= " AND {$field} = :value";
+            $params[":value"] = $value;
+        }
+
+   /* if ($field && $value){
         $query .=" AND {$field} = :value";
         $params[":value"] = $value;
-    }
+    }*/
 
 
     if (
@@ -83,7 +91,7 @@ class OperationModel
         $params[':end_date'] = $date['end_date'];
         }
 
-        $query .= "ORDER BY date ASC";
+        $query .= " ORDER BY date ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);

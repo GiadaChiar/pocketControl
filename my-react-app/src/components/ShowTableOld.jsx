@@ -14,7 +14,6 @@ export default function ShowTable() {
     const [getType, setType] = useState("");
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");
-    const [getTransactionType, setTransactionType] = useState("");
 
     const [tableType, setTableType] = useState("");
     const [tableData, setTableData] = useState([]);
@@ -106,13 +105,12 @@ export default function ShowTable() {
         console.log("End", getEndDate);
 
 
-console.log("transation new ", getTransactionType)
+
         try {
             const user = await FiltersTable(
                 getType,
                 getStartDate || null,
-                getEndDate || null,
-                getTransactionType || null
+                getEndDate || null
 
             );
 
@@ -157,32 +155,17 @@ console.log("transation new ", getTransactionType)
             )}
             <div id="filter">
 
-                
-                <div className="filter-container">
-                    <DropDown
-                        label="Tipologia"
-                        id="typeFilter"
-                        options={[
-                            { label: "Transazioni", value: "transactions" },
-                            { label: "Obbiettivi", value: "goals" },
-                            { label: "Budget", value: "budgets" }
-                        ]}
-                        onSelect={(value) => setType(value)}
-                    />
+            <DropDown
+                label="Tipologia"
+                id="typeFilter"
+                options={[
+                    { label: "Transazioni", value: "transactions" },
+                    { label: "Obbiettivi", value: "goals" },
+                    { label: "Buget", value: "budgets" }
 
-                    {getType === "transactions" && (
-                        <DropDown
-                            label="Tipo transazione"
-                            id="transactionType"
-                            options={[
-                                { label: "Tutte", value: "" },
-                                { label: "Entrate", value: "entrata" },
-                                { label: "Uscite", value: "spesa" }
-                            ]}
-                            onSelect={(value) => setTransactionType(value)}
-                        />
-                    )}
-                </div>
+                ]}
+                onSelect={(value) => setType(value)}
+            />
 
 
                 <div className="inLine">

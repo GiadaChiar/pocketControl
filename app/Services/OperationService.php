@@ -59,12 +59,15 @@ class OperationService
 
     public function getAll(int $idUser, ?array $data = null, ?string $field = null, ?string $value = null){
         try {
+
             //search by userID 
             $existingUser = $this->userModel->findByField("id", $idUser);
 
             if (!$existingUser) {
                 throw new \Exception("Utente non registrato correttamente, effettuare il login");
             }
+
+            
 
         $results = $this->operationModel->get(
         $idUser,

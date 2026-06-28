@@ -62,11 +62,19 @@ class UserService
             'HS256'
         );
 
-        
-        if ($token) {
-            return $token;
-        }
 
+        /*if ($token) {
+            return $token;
+        }*/
+
+        if ($token) {
+        echo json_encode([
+                "success" => true,
+                "token" => $token,
+                "name" => $user['name']
+            ]);
+            exit;
+        }
         return null;
     }
 

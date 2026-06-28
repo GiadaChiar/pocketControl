@@ -5,6 +5,7 @@ import SimpleBarChart from "./charts/graphicBarChar";
 import "../style/popUp.scss";
 import { useState, useEffect } from "react";
 import { BarCharDate } from "../services/transactionService";
+import { AreaChartExample } from "./charts/graphicAreaChar";
 import { formatChartData } from "../function/FormatData";
 
 
@@ -12,6 +13,7 @@ export default function BarChar() {
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");
     const [chartData, setChartData] = useState([]);
+    const [getTitle, setTitle] = useState("");
     const [popup, setPopup] = useState({
         visible: false,
         alert: "",
@@ -46,6 +48,7 @@ export default function BarChar() {
 
             const formatted = formatChartData(res.data || []);
             setChartData(formatted);
+            setTitle(res.title)
 
         } catch {
             setPopup({
@@ -77,6 +80,7 @@ export default function BarChar() {
 
             <div className="graphic" id="BarChart">
 
+
                 {popup.visible && (
                     <PopUp
                         alert={popup.alert}
@@ -92,8 +96,15 @@ export default function BarChar() {
                 )}
 
                 <div className="chartWrapperBar">
-                    <h3 className ="charTitle">Entrate e spense mensili e ricavato</h3>
-                <SimpleBarChart data={chartData} />
+                    <h3 id="titleBuget" className="ChartH3">
+                        {getTitle}
+                    </h3>
+                    <div className="inLine">
+                        
+                        <SimpleBarChart data={chartData} />
+
+                        <AreaChartExample data={chartData} />
+                    </div>
                 </div>
 
                 <div className="inLine">

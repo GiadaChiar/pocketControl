@@ -12,6 +12,7 @@ export default function PieChar() {
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");
     const [chartData, setChartData] = useState([]);
+    const [getTitle, setTitle] = useState("");
     const [getType, setType] = useState("");
     const [popup, setPopup] = useState({
         visible: false,
@@ -33,7 +34,7 @@ export default function PieChar() {
                 });
                 return
             }
-            console.log("passo" , start, end, type)
+            console.log("passo", start, end, type)
 
             const res = await PieCharDate(start, end, type);
 
@@ -48,6 +49,7 @@ export default function PieChar() {
 
             const formatted = formatPieData(res.data || []);
             setChartData(formatted);
+            setTitle(res.title);
 
         } catch {
             setPopup({
@@ -94,7 +96,9 @@ export default function PieChar() {
                 )}
 
 
-                <h3 className="charTitle">Divisione delle spese o delle entrate per mese</h3>
+                <h3 id="titleBuget" className="ChartH3">
+                    {getTitle}
+                </h3>
 
                 <div className="chartSection">
                     <div className="chartSide">

@@ -261,8 +261,10 @@ class OperationController
             
             if($start_date && $end_date){
                 $results = $this->operationService->monthOperations($userId,$start_date,$end_date);
+                $title = "Entrate e spese con i ricavati nel periodo selezionato";
             }else{
                 $results = $this->operationService->monthOperations($userId);
+                $title = "Entrate e spese con i ricavati totali per mese";
             }
 
             if ($results) {
@@ -270,6 +272,7 @@ class OperationController
 
                 echo json_encode([
                     "success" => true,
+                    "title" => $title,
                     "data" => $results
                 ]);
                 exit;
@@ -325,11 +328,14 @@ class OperationController
             if($type){
                 if ($start_date && $end_date) {
                     $results = $this->operationService->allExpenses($userId, $type,$start_date, $end_date);
+                    $title = "Divisione della {$type} nel periodo selezionato";
                 }else{
                     $results = $this->operationService->allExpenses($userId,$type);
+                    $title = "Divisione della {$type} dell'ultimo mese";
                 }
             }else{
                 $results = $this->operationService->allExpenses($userId, "spesa");
+                $title = "Divisione delle spese dell'ultimo mese";
             }
 
             if ($results) {
@@ -337,6 +343,7 @@ class OperationController
 
                 echo json_encode([
                     "success" => true,
+                    "title" => $title,
                     "data" => $results
                 ]);
                 exit;

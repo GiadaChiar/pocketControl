@@ -25,7 +25,8 @@ class FilterController
 
 
     //get all goals or bugets or operations by range time
-    public function filters(){
+    public function filters()
+    {
         try {
             $headers = getallheaders();
 
@@ -50,11 +51,11 @@ class FilterController
             $data = json_decode(file_get_contents("php://input"), true);
 
 
-        
-            if($data["tipology"] === "goals" ){
+
+            if ($data["tipology"] === "goals") {
                 $results = $this->goalService->getAll($userId, $data);
 
-                if($results){
+                if ($results) {
                     echo json_encode([
                         "success" => true,
                         "type" => "goalTable",
@@ -65,8 +66,19 @@ class FilterController
             }
 
             if ($data["tipology"] === "transactions") {
-                $results = $this->operationService->getAll($userId, $data);
 
+                $extraType = $data["extra_type"] ?? null;
+                if (!empty($extraType) && ($extraType === "spesa" || $extraType === "entrata")) {
+
+                    $results = $this->operationService->getAll(
+                        $userId,
+                        $data,
+                        "type",
+                        $extraType
+                    );
+                } else {
+                    $results = $this->operationService->getAll($userId, $data);
+                }
 
                 if ($results) {
                     echo json_encode([
@@ -90,7 +102,6 @@ class FilterController
                     exit;
                 }
             }
-            
         } catch (\Throwable $e) {
 
             http_response_code(401);
@@ -102,11 +113,10 @@ class FilterController
             ]);
             exit;
         }
-    
-
     }
 
-    public function delete(){
+    public function delete()
+    {
         try {
             $headers = getallheaders();
 
@@ -159,12 +169,12 @@ class FilterController
             }
 
             if ($data["type"] === "budgets") {
-                
-                
-            
-                $idElement = $this-> budgetService->delete($data["id"],$userId);
-                
-                if($idElement){
+
+
+
+                $idElement = $this->budgetService->delete($data["id"], $userId);
+
+                if ($idElement) {
                     echo json_encode([
                         "success" => true,
                         "type" => "bugetTable",
@@ -185,6 +195,4 @@ class FilterController
             exit;
         }
     }
-    
-
 }
