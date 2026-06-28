@@ -23,6 +23,8 @@ class FilterController
         $this->budgetService = new BudgetService($db);
     }
 
+
+    //get all goals or bugets or operations by range time
     public function filters(){
         try {
             $headers = getallheaders();
@@ -158,8 +160,9 @@ class FilterController
 
             if ($data["type"] === "budgets") {
                 
+                
             
-                $idElement = $this-> operationService->delete($data["id"],$userId);
+                $idElement = $this-> budgetService->delete($data["id"],$userId);
                 
                 if($idElement){
                     echo json_encode([

@@ -55,8 +55,8 @@ export function filterPieChar(data) {
         params.append("end_date", data.end_date);
     }
 
-    if (data.type) {
-        params.append("type", data.type);
+    if (data.typology) {
+        params.append("typology", data.typology);
     }
 
     return apiRequestToken(
@@ -91,3 +91,22 @@ export function filterNeedleChart(data) {
     );
 }
 
+export function bugetSummary(data) {
+    const params = new URLSearchParams();
+
+    if (data.start_date) {
+        params.append("start_date", data.start_date);
+    }
+
+    if (data.end_date) {
+        params.append("end_date", data.end_date);
+    }
+
+    return apiRequestToken(
+        `/api/bugetSummary?${params.toString()}`,
+        {
+            method: "GET"
+        }
+    );
+
+}

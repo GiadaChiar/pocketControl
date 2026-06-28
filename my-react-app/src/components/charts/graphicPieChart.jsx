@@ -47,7 +47,7 @@ const MyPieChart = (props) => {
 
 export default function PieChartWith({ isAnimationActive = true , data}) {
     return (
-        <PieChart style={{ width: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }} responsive>
+        <PieChart style={{ width: '100%', maxWidth: '450px', maxHeight: '80vh', aspectRatio: 1 }} responsive>
             <Pie
                 data={data}
                 labelLine={false}

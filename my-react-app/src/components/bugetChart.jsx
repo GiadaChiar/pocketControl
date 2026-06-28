@@ -1,10 +1,10 @@
 import DataInput from "./datainput";
 import PopUp from "./popUp";
 import Button from "./button";
-import RadialChart from "./charts/graphicRadialChart";
+import BudgetLinearChart from "./charts/text2";
 import "../style/popUp.scss";
 import { useState, useEffect } from "react";
-import { NeedleChar } from "../services/transactionService";
+import { BugetsChar } from "../services/transactionService";
 
 
 
@@ -34,7 +34,7 @@ export default function BudgetChar() {
             }
 
 
-            const res = await NeedleChar(start, end, "budgets");
+            const res = await BugetsChar(start, end);
 
             if (res.success === false) {
                 setPopup({
@@ -48,7 +48,7 @@ export default function BudgetChar() {
             /*const formatted = formatPieData(res.data || []);
             setChartData(formatted);*/
 
-            setChartData(res.date);
+            setChartData(res.data);
 
         } catch {
             setPopup({
@@ -100,7 +100,7 @@ export default function BudgetChar() {
                     <h3 className ="charTitle">Tutti i Budgets</h3>
                         <div className="goalsContainer">
                             {chartData.map((goal, index) => (
-                                <RadialChart
+                                <BudgetLinearChart
                                     key={goal.id ?? index}
                                     result={goal}
                                 />

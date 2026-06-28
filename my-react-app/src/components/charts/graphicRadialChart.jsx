@@ -36,9 +36,9 @@ export default function RadialChart({ result }) {
 
             <RadialBarChart
                 width={380}
-                height={300}
+                height={260}
                 cx="50%"
-                cy="100%"
+                cy="85%"
                 innerRadius="60%"
                 outerRadius="100%"
                 data={data}
@@ -55,6 +55,9 @@ export default function RadialChart({ result }) {
                     dataKey="value"
                     cornerRadius={10}
                     background={{ fill: "rgb(248, 244, 244, 0.8)" }}
+                    isAnimationActive={true}
+                    animationDuration={1200} 
+                    animationEasing= "ease-in-out"
                     fill={getColor(progress)}
                 />
                 
@@ -69,10 +72,19 @@ export default function RadialChart({ result }) {
                     {description}
                 </p>
 
-                <div style={{ marginTop: 20, fontSize: 18 }}>
-                    <p>Obiettivo: €{goal}</p>
-                    <p>Raggiunto: €{value}</p>
-                    <p>Mancano: €{remaining}</p>
+                
+                <div style={{
+                    marginTop: 20,
+                    fontSize: 18,
+                    backgroundColor: "#ffffff",
+                    fontFamily: "Arial, sans-serif",
+                    padding: 10,
+                    borderRadius: 10,
+                    boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+                }}>
+                    <p>Obiettivo: {goal}€</p>
+                    <p>Raggiunto: {value}€</p>
+                    <p>Mancano: {remaining}€</p>
                 </div>
             </div>
 

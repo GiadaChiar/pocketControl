@@ -8,6 +8,9 @@
     position: relative;
     padding: 15px;
     background-color: vars.$color32;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 
     &::before,
     &::after {
@@ -41,13 +44,16 @@
         .over{
             position: relative;
             z-index: 5;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
 
         .title{
             font-family: vars.$font1;
             font-size: vars.$font-size4;
             color:vars.$color25;
             margin-bottom: 20px;
-            margin-top: 50px;
+            margin-top: 40px;
             text-shadow:
                 -1px -1px 0 vars.$color1;
                 font-weight: 800;
@@ -61,65 +67,18 @@
             font-size: vars.$font-size5;
         }
 
-        
-
-        .inLine{
-            display: flex;
-            flex-wrap: wrap;
-            gap:20px;
-        }
-
-
-
-        .input-group.mb-3{
-            flex: 1 1 300px;
-        }
-        
-
-        .buttonSend{
-            margin-bottom: 30px;
-            &:hover{
-                background-color: vars.$color3;
-            }
-        }
 
         .navbar-brand{
             font-family: vars.$font1;
-            font-size: vars.$font-size6;
+            font-size: vars.$font-size7;
             text-decoration: underline;
 
             &:hover{
                 color:vars.$color25;
             }
         }
-
-
-        
-button{     margin-top: 30px;
-            padding:10px;
-            font-family: vars.$font1;
-            color:vars.$color2;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-            border-radius: 15%;
-            border-style:double;
-            border-color: vars.$color2;
-            background: vars.$color5;
-            &:hover{
-                color:vars.$color5;
-
-            }
-            
-        }
-
-        .navbar-brand{
-            &:hover{
-                color:vars.$color3;
-            }
-        }
     }
 }
-
-
 
 
 @keyframes rotateBlob {

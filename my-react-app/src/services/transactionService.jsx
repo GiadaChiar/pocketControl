@@ -1,5 +1,5 @@
 
-import { insertTransaction, filterBarChar, filterPieChar } from "../api/transactionApi";
+import { insertTransaction, filterBarChar, filterPieChar, bugetSummary } from "../api/transactionApi";
 import { searchFilter } from "../api/filterService";
 
 
@@ -33,7 +33,8 @@ export async function BarCharDate(
 
 
 
-export async function PieCharDate(start_date,
+export async function PieCharDate(
+    start_date,
     end_date,
     typology
 ) {
@@ -44,7 +45,7 @@ export async function PieCharDate(start_date,
     })
 }
 
-
+//chart goals and bugets
 export async function NeedleChar(
     start_date,
     end_date,
@@ -56,3 +57,18 @@ export async function NeedleChar(
         tipology
     })
 }
+
+//chartBugets
+export async function BugetsChar(
+    start_date,
+    end_date,
+) {
+    return await bugetSummary({
+        start_date,
+        end_date
+    })
+}
+
+
+
+

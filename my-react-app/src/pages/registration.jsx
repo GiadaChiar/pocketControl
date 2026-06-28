@@ -90,96 +90,107 @@ export default function Registration() {
             <Menu />
             <div className="user-page">
                 <div className="over">
-                <Title
+                    <Title
                         classname="title"
-                    id="title_registration"
-                    text="ISCRIVITI"
-                />
-
-                {popup.visible && (
-                    <PopUp
-                        alert={popup.alert}
-                        message={popup.message}
-                        onClose={() =>
-                            setPopup({
-                                visible: false,
-                                alert: "",
-                                message: ""
-                            })
-                        }
-                    />
-                )}
-
-                <div className="inLine">
-                    <Input
-                        id="email_reg"
-                        type="email"
-                        placeholder="miaemail@gmail.com"
-                        id_span="email_span_reg"
-                        text_span="Email"
-                        onChange={(e) =>
-                            setEmail(e.target.value)
-                        }
+                        id="title_registration"
+                        text="ISCRIVITI"
                     />
 
-                    <Input
-                        id="name"
-                        type="text"
-                        placeholder="Mario"
-                        id_span="name_span"
-                        text_span="Nome"
-                        onChange={(e) =>
-                            setName(e.target.value)
-                        }
-                    />
+                    {popup.visible && (
+                        <PopUp
+                            alert={popup.alert}
+                            message={popup.message}
+                            onClose={() =>
+                                setPopup({
+                                    visible: false,
+                                    alert: "",
+                                    message: ""
+                                })
+                            }
+                        />
+                    )}
 
-                    <Input
-                        id="surname"
-                        type="text"
-                        placeholder="Rossi"
-                        id_span="surname_span"
-                        text_span="Cognome"
-                        onChange={(e) =>
-                            setSurname(e.target.value)
-                        }
-                    />
+                    <div className="inLine">
+                        <div>
+                            <Input
+                                id="email_reg"
+                                type="email"
+                                placeholder="miaemail@gmail.com"
+                                id_span="email_span_reg"
+                                text_span="Email"
+                                onChange={(e) =>
+                                    setEmail(e.target.value)
+                                }
+                            />
+                        </div>
 
-                    <Input
-                        id="password_reg"
-                        type="password"
-                        placeholder="password"
-                        id_span="span_password_reg"
-                        text_span="password"
-                        onChange={(e) =>
-                            setPassword(e.target.value)
-                        }
-                    />
+                        <div>
 
-                    <Input
-                        id="password_copy"
-                        type="password"
-                        placeholder="password_copy"
-                        id_span="span_password_copy"
-                        text_span="Ripeti password"
-                        onChange={(e) =>
-                            setCopyPassword(e.target.value)
-                        }
-                    />
-                </div>
-                <div>
-                    <Button
-                        id="btn_registration"
-                        className="buttonSend"
-                        label="REGISTRATI"
-                        type="submit"
-                        onClick={handleRegistration}
-                    />
-                </div>
+                            <Input
+                                id="name"
+                                type="text"
+                                placeholder="Mario"
+                                id_span="name_span"
+                                text_span="Nome"
+                                onChange={(e) =>
+                                    setName(e.target.value)
+                                }
+                            />
+                        </div>
 
-                <div>
-                    <Link className="navbar-brand" to="/login">
-                        {"Sei già registrato? Accedi!"}
-                    </Link>
+                        <div>
+
+                            <Input
+                                id="surname"
+                                type="text"
+                                placeholder="Rossi"
+                                id_span="surname_span"
+                                text_span="Cognome"
+                                onChange={(e) =>
+                                    setSurname(e.target.value)
+                                }
+                            />
+                        </div>
+
+                        <div>
+                            <Input
+                                id="password_reg"
+                                type="password"
+                                placeholder="password"
+                                id_span="span_password_reg"
+                                text_span="password"
+                                onChange={(e) =>
+                                    setPassword(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div>
+                            <Input
+                                id="password_copy"
+                                type="password"
+                                placeholder="password_copy"
+                                id_span="span_password_copy"
+                                text_span="Ripeti password"
+                                onChange={(e) =>
+                                    setCopyPassword(e.target.value)
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <Button
+                            id="btn_registration"
+                            className="buttonSend"
+                            label="REGISTRATI"
+                            type="submit"
+                            onClick={handleRegistration}
+                        />
+                    </div>
+
+                    <div>
+                        <Link className="navbar-brand" to="/login">
+                            {"Sei già registrato? Accedi!"}
+                        </Link>
                     </div>
                 </div>
             </div>

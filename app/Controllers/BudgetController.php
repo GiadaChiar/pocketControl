@@ -18,7 +18,7 @@ class BudgetController
         $this->budgetService = new BudgetService($db);
     }
 
-
+    //insert new buget
     public function insert()
     {
 
@@ -97,7 +97,7 @@ class BudgetController
         }
     }
 
-
+    //get all bugets 
     public function showAll()
     {
         try {
@@ -184,6 +184,82 @@ class BudgetController
                 "success" => false,
                 "error" => $e->getMessage()
             ]);
+        }
+    }
+
+
+
+
+
+    public function bugetSummary()
+    {
+        try {
+
+            header('Content-Type: application/json');
+            $headers = getallheaders();
+
+            $authHeader = $headers['Authorization'] ?? null;
+
+            if (!$authHeader) {
+                http_response_code(401);
+
+                echo json_encode([
+                    "success" => false,
+                    "type" => "transaction",
+                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                ]);
+                exit;
+            }
+
+            $token = str_replace('Bearer ', '', $authHeader);
+
+            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+
+            $userId = $decoded->user_id;
+
+            //optional filter 
+            $start_date = $_GET['start_date'] ?? null;
+            $end_date =  $_GET['end_date'] ?? null;
+
+            if ($start_date && $end_date) {
+                $filter = [
+                    "start_date" => $start_date,
+                    "end_date" => $end_date
+                ];
+                $results = $this->budgetService->getBudgetSummary($userId, $filter);
+            }else{
+                
+                $results = $this->budgetService->getBudgetSummary($userId);
+            }
+
+
+
+/*
+            if ($start_date && $end_date) {
+                $results = $this->budgetService->getBudgetSummary($userId, $start_date, $end_date);
+            } else {
+                exit;
+                $results = $this->operationService->allBugets($userId);
+            }
+*/
+            if ($results) {
+                http_response_code(200);
+
+                echo json_encode([
+                    "success" => true,
+                    "data" => $results
+                ]);
+                exit;
+            }
+        } catch (\Throwable $e) {
+
+            http_response_code(401);
+
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+            exit;
         }
     }
 }

@@ -2,10 +2,10 @@
 
 #home_container {
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-y: auto;
 
-    background-image: url("../assets/city.jpeg"); // cambia path
+    background-image: url("../assets/city.jpeg"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,7 +16,135 @@
 
     position: relative;
 
-    /* container bolle */
+
+    //image and descriptions
+
+    .center {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        
+        //circle image
+        .circle-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInLeft 0.8s ease-out forwards;
+            z-index: 5;
+
+            .outer-circle {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+
+                //border circle
+                padding: 10px;
+                background-color: transparent;
+                background: linear-gradient(135deg, vars.$color3, vars.$color5);
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 5px solid white;
+                }
+
+                .inner-circle {
+                    position: absolute;
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    background: vars.$color2;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+
+
+    
+    
+//button section 
+.center.buttons{
+    position: relative;
+    z-index: 6;
+    gap: 20px;
+    justify-content: space-around;
+
+
+    .home_btn{
+        padding: 5px;
+        font-family: vars.$font1;
+        color:vars.$color2;
+        width: 150px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        border-radius: 15%;
+        border-style:double;
+        border-color: vars.$color2;
+        background: vars.$color5;
+        margin-top: 50px;
+        
+        &:hover{
+            color:vars.$color25;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+        }
+    }
+}
+
+
+    //text section 
+
+    .under{
+            max-width: 40%;
+            
+            h1{
+                
+                font-family: vars.$font1;
+                color:vars.$color2;
+                text-shadow:
+                -1px -1px 0 vars.$color3;
+                font-weight: 800;
+            }
+            #textHome{
+                width: 100%;
+                padding: 15px;
+                border-radius: 15%;
+                box-shadow: 0 0 150px vars.$color6;
+                background: radial-gradient(
+                    circle,
+                    vars.$color5 60%,
+                    rgba(vars.$color5, 0.6) 80%,
+                    rgba(vars.$color5, 0) 100%
+                    );
+                    
+                p{
+                font-family: vars.$font2;
+                font-weight: 800;
+                font-size: vars.$font-size6;
+                color:vars.$color25;
+                text-shadow:
+                2px -1px 0 vars.$color1;
+            }
+
+            }
+            
+        }
+
+
+
+
+
+     //bubbles span
     .bubbles {
         position: absolute;
         inset: 0;
@@ -98,75 +226,8 @@
     }
 
 
-    //center page image and title
 
-    .center {
-
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        
-        //circle image
-        .circle-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            animation: slideInLeft 0.8s ease-out forwards;
-            z-index: 5;
-
-            .outer-circle {
-                position: relative;
-                width: 300px;
-                height: 300px;
-                border-radius: 50%;
-
-                /* bordo o effetto anello */
-                padding: 10px;
-                background-color: transparent;
-                background: linear-gradient(135deg, vars.$color3, vars.$color5);
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-                
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                    object-fit: cover;
-
-                    border: 5px solid white;
-                }
-
-                .inner-circle {
-                    position: absolute;
-                    width: 70px;
-                    height: 70px;
-                    border-radius: 50%;
-
-                    background: vars.$color2;
-
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-
-                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-                }
-            }
-        }
-    }
-
-
-
-
-
-
-
-//animations
+//circle animations 
 
     @keyframes slideInLeft {
     0% {
@@ -180,6 +241,7 @@
     }
 }
 
+//bubbles animation
 @keyframes floatUp {
         10% {
             transform: translate(30%, 0) scale(1);
@@ -210,50 +272,5 @@
         }
     }
 
-//button section 
-.center.buttons{
-    gap: 20px;
-    justify-content: space-around;
-    margin-bottom: 100px;
-    .home_btn{
-        padding: 5px;
-        font-family: vars.$font1;
-        color:vars.$color2;
-        width: 150px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-        border-radius: 15%;
-        border-style:double;
-        border-color: vars.$color2;
-        background: vars.$color5;
-        
-        &:hover{
-            color:vars.$color25;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 1);
-        }
-    }
-}
-
-
-    //text section 
-
-    .under{
-            max-width: 40%;
-            h1{
-                
-                font-family: vars.$font1;
-                color:vars.$color2;
-                text-shadow:
-                -1px -1px 0 vars.$color3;
-                font-weight: 800;
-            }
-            p{
-                font-family: vars.$font2;
-                font-weight: 800;
-                font-size: vars.$font-size6;
-                color:vars.$color3;
-                text-shadow:
-                2px -1px 0 vars.$color1;
-            }
-        }
 
 } 

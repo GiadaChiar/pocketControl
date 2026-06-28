@@ -28,6 +28,7 @@ $router->get('/api/allExpense', [OperationController::class, 'expenses']);
 
 
 
+
 //$router->delete('/api/operations/{id}', [OperationController::class, 'delete']);
 
 
@@ -48,6 +49,7 @@ $router->post('/api/goals', [GoalController::class, 'insert']);
 //BUDGETS
 $router->post('/api/budgets', [BudgetController::class, 'insert']);
 $router->get('/api/budgets', [BudgetController::class, 'showAll']);
+$router->get('/api/bugetSummary', [BudgetController::class, 'bugetSummary']);
 //$router->delete('/api/budgets/{id}', [BudgetController::class, 'delete']);
 
 

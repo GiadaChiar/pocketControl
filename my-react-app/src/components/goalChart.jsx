@@ -45,8 +45,6 @@ export default function GoalChar() {
                 return;
             }
 
-            /*const formatted = formatPieData(res.data || []);
-            setChartData(formatted);*/
 
             setChartData(res.date);
 

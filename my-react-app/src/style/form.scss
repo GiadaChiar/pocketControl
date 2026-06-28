@@ -3,14 +3,20 @@
     
     
 #form{
-    background: vars.$color32;
-    margin-top: 60px;
-    padding-left: 50px;
-    padding-right: 50px;
-    color: vars.$color1;
-    font-size: vars.$font-size6;
-    font-family: vars.$font2;
-    margin-bottom: 10px;
+    background: radial-gradient(
+                circle,
+                vars.$color32 60%,
+                rgba(vars.$color4, 0.6) 80%,
+                rgba(vars.$color3, 0) 100%
+                );
+        margin-top: 60px;
+        padding-left: 50px;
+        padding-right: 30px;
+        color: vars.$color25;
+        font-family: vars.$font1;
+        font-size: vars.$font-size6;
+        margin-bottom: 10px;
+        box-shadow: 0 0 15px vars.$color6;
 
     p{
         font-family: vars.$font1;
@@ -19,14 +25,32 @@
     }
     button{
         background-color: vars.$color2;
-        margin-bottom: 10px;
+        margin-bottom: 50px;
+    }
+
+    #question{
+        text-shadow:
+                -1px -1px 0 vars.$color3;
+                font-weight: 800;
     }
 }
 
 
 //change color button send
 #submit{
-    color:vars.$color1;
+    color:vars.$color2;
+    box-shadow: 0 0 15px vars.$color2;
+    background: vars.$color5 !important;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    min-width: 100px;
+    border-color: vars.$color2;
+
+    &:hover{
+            color:vars.$color25;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+        }
+
 }
 
 

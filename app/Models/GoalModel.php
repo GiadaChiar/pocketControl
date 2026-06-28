@@ -12,6 +12,7 @@ class GoalModel{
         $this->db = $db;
     }
 
+    
     public function get( int $idUser, array $data){
 
     $query = "

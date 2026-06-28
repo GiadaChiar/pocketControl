@@ -25,7 +25,7 @@ export default function SimpleBarChart({data}){
             <YAxis width="auto" />
             <Tooltip  />
             <Legend />
-                <Bar dataKey="entrate" fill="rgb(77, 154, 85, 0.8)" activeBar={{ fill: 'rgb(77, 154, 85)', stroke: 'black' }} radius={[5, 5, 0, 0]} />
+            <Bar dataKey="entrate" fill="rgb(77, 154, 85, 0.8)" activeBar={{ fill: 'rgb(77, 154, 85)', stroke: 'black' }} radius={[5, 5, 0, 0]}  />
                 <Bar dataKey="spese" fill="rgba(131, 54, 61, 0.8)" activeBar={{ fill: 'rgba(131, 54, 61)', stroke: 'black' }} radius={[5, 5, 0, 0]} />
                 <Bar dataKey="totale" fill="rgb(206, 211, 98,0.8)" activeBar={{ fill: 'rgb(206, 211, 98)', stroke: 'black' }} radius={[5, 5, 0, 0]} />
         </BarChart>

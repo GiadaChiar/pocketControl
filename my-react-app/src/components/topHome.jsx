@@ -22,10 +22,11 @@ export default function TopHome() {
                 </div>
                     <div className="center">
                         <div className="under">
-                            <h1 >Financial</h1>
-                            <h1 >Control</h1>
+                    <h1 >Financial Control</h1>
+                    <div id= "textHome">
                             <p>Rendi facile e a portatata di mano la tua gestione finanziaria</p>
-                            <p>Insieme a noi.</p>
+                        <p>Insieme a noi.</p>
+                    </div>
                         </div>
                         <div className="circle-wrapper">
                             <div className="outer-circle">

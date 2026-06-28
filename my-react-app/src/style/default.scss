@@ -1,6 +1,8 @@
 @use 'variables.scss' as vars;
 
-
+body{
+    font-size: vars.$font-size7;
+}
 
 .inLine{
                 display: flex;
@@ -13,7 +15,7 @@
 
 .buttonSend{
             margin-bottom: 30px;
-            font-size: 15px;
+            font-size: vars.$font-size7;
             max-width: 80px;
             color:vars.$color2;
             width: 150px;
@@ -36,13 +38,6 @@ h1{
                 color:vars.$color25;
         }
 
-.form-control{
-            width: 100%;
-            font-size: vars.$font-size5;
-            max-width: 50px;
-            max-height: 50px;
-
-        }
 
 .charTitle{
     color:vars.$color25;
@@ -57,8 +52,26 @@ h1{
                 background-color: vars.$color3;
                 box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
                 max-width: 200px;
-                font-size: 15px;
+                font-size: vars.$font-size7;
                 padding: 5px;
+            }
+
+                .dropdown-menu{
+                    overflow:hidden;
+                    width: auto;
+                    min-width: 200px;
+
+                    .dropdown-item{
+                    font-size: vars.$font-size8;
+                    display: block;
+                    text-align: center;
+                    &:active{
+                        background-color: vars.$color32;
+                    }
+                    
+                    
+                    }
+                }
 
             }
-        }
+        

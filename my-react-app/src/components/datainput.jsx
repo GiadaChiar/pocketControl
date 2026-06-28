@@ -6,7 +6,7 @@ export default function DataInput({
     onChange
 }) {
     return (
-        <div className="input-group mb-3">
+        <div className="input-group mb-3 data">
             <span className="input-group-text">
                 {label}
             </span>

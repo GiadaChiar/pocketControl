@@ -22,7 +22,7 @@ export default function PieChar() {
 
 
 
-    const loadChart = async (start = null, end = null) => {
+    const loadChart = async (start = null, end = null, type = null) => {
         try {
 
             if (start && end && new Date(end) < new Date(start)) {
@@ -33,9 +33,9 @@ export default function PieChar() {
                 });
                 return
             }
+            console.log("passo" , start, end, type)
 
-
-            const res = await PieCharDate(start, end, getType);
+            const res = await PieCharDate(start, end, type);
 
             if (res.success === false) {
                 setPopup({
@@ -69,7 +69,7 @@ export default function PieChar() {
 
     //if I click filter 
     const handlePieChar = () => {
-        loadChart(getStartDate, getEndDate);
+        loadChart(getStartDate, getEndDate, getType);
     };
 
 

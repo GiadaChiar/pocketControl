@@ -50,8 +50,9 @@ class BudgetModel
     }
 
 
-    public function get(int $idUser, array $data)
+    public function get(int $idUser, ?array $data= null )
     {
+
 
         $query = "
     SELECT * FROM budgets
@@ -75,12 +76,14 @@ class BudgetModel
         }
 
 
-        $query .= "ORDER BY start_date ASC";
+        $query .= " ORDER BY start_date ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        
 
         return $results;
     }

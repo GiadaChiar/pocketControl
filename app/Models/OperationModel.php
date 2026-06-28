@@ -12,6 +12,8 @@ class OperationModel
     {
         $this->db = $db;
     }
+
+    //insert transation
     public function insert(array $data, int $userId): ?int
     {
 
@@ -50,7 +52,7 @@ class OperationModel
     }
 
 
-
+    //get specific transations
     public function get( int $idUser,  ?array $date = null, ?string $field= null , ?string $value = null){
 
 
@@ -92,6 +94,7 @@ class OperationModel
     }
 
 
+    //delete transation
     public function delete(int $id, int $userId): bool
     {
         $stmt = $this->db->prepare("
@@ -105,7 +108,7 @@ class OperationModel
         ]);
     }
 
-
+    //get all fields category (dropdown)
     public function allCategories():?array{
 
     $query = "
@@ -121,7 +124,7 @@ class OperationModel
     }
 
 
-
+    //get operations for month by user and range time
     public function getMonthOperation(int $idUser, ?string $start_date=null, ?string $end_date= null){
 
         $query = "
@@ -160,11 +163,11 @@ class OperationModel
     }
 
 
-
+    //get expenses or enters by user and time range in base their category
     public function geAllExpenses(int $idUser,string $type, ?string $start_date = null, ?string $end_date = null){
         $query = "
         SELECT category,
-        SUM(amount)  AS total
+        SUM(amount)  AS total 
         FROM pocket.transactions 
         WHERE type = :type
         and user_id = :user_id
@@ -199,7 +202,36 @@ class OperationModel
 
 
 
-    
+    //get sum of all expenses filter by time range
+    public function SumExpenses(int $idUser, ?string $start_date = null, ?string $end_date = null){
+        $query = "
+        SELECT type, 
+        SUM(amount) As total 
+        FROM pocket.transactions 
+        WHERE type = 'spesa'
+        AND user_id = :user_id
+        ";
+
+        $params = [
+            ":user_id" => $idUser,
+        ];
+
+        if (!empty($start_date) && !empty($end_date)) {
+
+            $query .= " AND date BETWEEN :start_date AND :end_date";
+
+            $params[':start_date'] = $start_date;
+            $params[':end_date'] = $end_date;
+        } 
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute($params);
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+
+    }
 
 
 

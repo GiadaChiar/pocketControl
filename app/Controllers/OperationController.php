@@ -316,7 +316,9 @@ class OperationController
             //optional filter 
             $start_date = $_GET['start_date'] ?? null;
             $end_date =  $_GET['end_date'] ?? null;
-            $type = $_GET['type'] ?? null;
+            $type = $_GET['typology'] ?? null;
+
+
 
             //default spesa
 
