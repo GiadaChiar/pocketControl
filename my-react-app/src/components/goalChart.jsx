@@ -1,5 +1,5 @@
 import DataInput from "./datainput";
-import PopUp from "./popUp";
+import { PopUp } from "./popUp";
 import Button from "./button";
 import RadialChart from "./charts/graphicRadialChart";
 import "../style/popUp.scss";

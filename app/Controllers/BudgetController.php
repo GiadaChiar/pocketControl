@@ -6,16 +6,19 @@ namespace App\Controllers;
 
 use PDO;
 use App\Services\BudgetService;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use App\Services\AuthService;
+
 
 class BudgetController
 {
     private BudgetService $budgetService;
+    private AuthService $authService;
+    
 
     public function __construct(PDO $db)
     {
         $this->budgetService = new BudgetService($db);
+        $this->authService  = new AuthService();
     }
 
     //insert new buget
@@ -25,28 +28,15 @@ class BudgetController
 
         try {
 
-            header('Content-Type: application/json');
-
-
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "insertBudget",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
 
             $data = json_decode(file_get_contents("php://input"), true);
@@ -56,8 +46,7 @@ class BudgetController
             $end_date = $data["end_date"] ?? null;
             $limit_amount = $data['limit_amount'] ?? null;
             $description = $data['description'] ?? null;
-            
-            unset($data['request']);
+
 
 
             if (empty($userId) || empty($limit_amount) || empty($start_date) || empty($end_date)) {
@@ -65,7 +54,7 @@ class BudgetController
 
                 echo json_encode([
                     "success" => false,
-                    "type" => "insertBudget"
+                    "error" => "Completare tutti i campi richiesti nel formato valido"
                 ]);
                 exit;
             }
@@ -80,7 +69,6 @@ class BudgetController
 
                 echo json_encode([
                     "success" => true,
-                    "type" => "insertBudget",
                     "data" =>  $IdBudget
                 ]);
                 exit;
@@ -90,7 +78,6 @@ class BudgetController
 
             echo json_encode([
                 "success" => false,
-                "type" => "insertBudget",
                 "error" => $e->getMessage(),
             ]);
             exit;
@@ -101,26 +88,15 @@ class BudgetController
     public function showAll()
     {
         try {
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "AllGoals",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
 
             $goals = $this->budgetService->getALL($userId);
@@ -130,7 +106,6 @@ class BudgetController
 
                 echo json_encode([
                     "success" => true,
-                    "type" => "AllGoals",
                     "data" => $goals
                 ]);
                 exit;
@@ -141,7 +116,6 @@ class BudgetController
 
             echo json_encode([
                 "success" => false,
-                "type" => "AllGoals",
                 "error" => $e->getMessage()
             ]);
             exit;
@@ -152,24 +126,15 @@ class BudgetController
     public function delete($id)
     {
         try {
-            header('Content-Type: application/json');
-
-            $headers = getallheaders();
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
                 echo json_encode([
                     "success" => false,
-                    "error" => "Token mancante"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             $result = $this->budgetService->delete((int)$id, (int)$userId);
 
@@ -195,27 +160,15 @@ class BudgetController
     {
         try {
 
-            header('Content-Type: application/json');
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "transaction",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             //optional filter 
             $start_date = $_GET['start_date'] ?? null;

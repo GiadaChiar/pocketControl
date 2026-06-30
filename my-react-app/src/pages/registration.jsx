@@ -2,7 +2,7 @@
 import Title from "../components/title";
 import Input from "../components/input";
 import Button from "../components/button";
-import PopUp from "../components/popUp";
+import { PopUp } from "../components/popUp";
 import Menu from "../components/menu";
 import "../style/user.scss";
 import "../style/popUp.scss";
@@ -31,11 +31,11 @@ export default function Registration() {
     const handleRegistration = async () => {
 
         const credentials = CheckRegistration(
-            getEmail,
-            getName,
-            getSurname,
-            getPassword,
-            getCopyPassword,
+            getEmail.trim().toLowerCase(),
+            getName.trim(),
+            getSurname.trim(),
+            getPassword.trim(),
+            getCopyPassword.trim(),
             setPopup
         )
 
@@ -50,7 +50,7 @@ export default function Registration() {
                 credentials.password,
             )
             console.log("richiesta che è tornata", user);
-            if (user.type === "registration") {
+            
                 console.log("arrivato richiesta", user.type)
                 if (user.success === false) {
                     setPopup({
@@ -70,22 +70,17 @@ export default function Registration() {
 
                         setPopup({
                             visible: true,
-                            alert: "Login effettuato",
-                            message: "Benvenuto"
+                            alert: "Registrazione effettuata",
+                            message: "Procedere con il login"
                         });
 
                         setTimeout(() => {
-                            navigate("/dashboard");
-                        }, 1200); // 1.2 secondi
+                            navigate("/logIn");
+                        }, 1200); // 1.2 second
                     }
-                    /*if (user.data) {
-                        localStorage.setItem("token", user.data);
-                        navigate("/dashboard")
-
-                    }*/
+                    
                     return;
                 }
-            }
 
         } catch {
             setPopup({

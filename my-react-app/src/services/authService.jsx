@@ -4,7 +4,6 @@ import { registerUser } from "../api/authApi";
 
 export async function loginService(email, password) {
     return await loginUser({
-       // request: "login",
         email,
         password
     });
@@ -16,7 +15,6 @@ export async function registartionService(email,
     surname,
     password) {
     return await registerUser({
-        request: "registration",
         email,
         name,
         surname,

@@ -19,7 +19,12 @@
     padding-bottom: 18px;
     width: 100%;
 
-    .popup-box{
+}
+
+
+
+
+    .popup-box, .popup{
         background-color: vars.$color6;
         padding-top: 35px;
         padding-bottom: 15px;
@@ -54,4 +59,29 @@
         }
 
     }
+
+//pop-Up update goal (confirm)
+
+.popup-overlay{
+    background-color: vars.$color2;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:  1px solid vars.$color32;
+    z-index: 9998;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+
 }
+
+//buttons confirm
+.btn.btn-secondary{
+    background-color: vars.$colored;
+}
+
+.btn.btn-success{
+    background-color: vars.$colorgreen;
+}
+

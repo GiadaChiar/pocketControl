@@ -3,8 +3,7 @@ import Input from "./input";
 import Button from "./button";
 import DataInput from "./datainput";
 import { useState } from "react";
-import PopUp from "../components/popUp";
-//import { validationInput } from "../function/Validation";
+import { PopUp } from "../components/popUp";
 import { NewGoal } from "../services/goalService";
 import "../style/popUp.scss";
 
@@ -23,7 +22,7 @@ export default function CollapseGoal() {
     });
 
     const handleGoal = async () => {
-        if (!getDate || !getTarget || !getCurrent) {
+        if (!getDate || getTarget === "" || getCurrent === "") {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
@@ -32,11 +31,13 @@ export default function CollapseGoal() {
             return;
         }
 
-        if (Number(getTarget) < Number(getCurrent)) {
+    
+
+        if (Number(getTarget) <= 0 || Number(getCurrent) < 0 || Number(getTarget) < Number(getCurrent)) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
-                message: "l'obbiettivo non può esssere inferiore alla somma di partenza",
+                message: "i valori non possono essere inferiore a zero e l'obbiettivo non può esssere inferiore al valore di partenza ",
             });
             return
         }

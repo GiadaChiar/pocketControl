@@ -42,8 +42,13 @@ class UserModel
     }
 
 
+
     public function insert(array $data): ?int
     {
+        // if password hash
+        if (isset($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        }
 
 
         $columns = implode(', ', array_keys($data));

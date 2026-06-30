@@ -1,6 +1,6 @@
 import DataInput from "./datainput";
 
-import PopUp from "./popUp";
+import { PopUp } from "./popUp";
 import Button from "./button";
 import BudgetLinearChart from "./charts/budget";
 import "../style/popUp.scss";

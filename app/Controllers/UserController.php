@@ -10,6 +10,7 @@ use App\Services\UserService;
 class UserController
 {
     private UserService $userService;
+    
 
     public function __construct(PDO $db)
     {
@@ -39,13 +40,11 @@ class UserController
 
                 echo json_encode([
                     "success" => false,
-                    "type" => "login",
                     "error" => "credenziali incomplete",
                 ]);
                 exit;
             }
 
-            // chiamata service
             $token = $this->userService->login($email, $password);
 
             if ($token) {
@@ -53,7 +52,6 @@ class UserController
 
                 echo json_encode([
                     "success" => true,
-                    "type" => "login",
                     "data" => $token
                 ]);
                 exit;
@@ -64,7 +62,6 @@ class UserController
 
             echo json_encode([
                 "success" => false,
-                "type" => "login",
                 "error" => $e->getMessage()
             ]);
             exit;
@@ -96,7 +93,6 @@ class UserController
 
                 echo json_encode([
                     "success" => false,
-                    "type" => "registration",
                     "error" => "Campi mancanti o incorretti",
                     "data" => $data
                 ]);
@@ -112,7 +108,6 @@ class UserController
 
                 echo json_encode([
                     "success" => true,
-                    "type" => "registration",
                     "data" =>  $IdUser
                 ]);
                 exit;
@@ -122,7 +117,6 @@ class UserController
 
             echo json_encode([
                 "success" => false,
-                "type" => "registration",
                 "error" => $e->getMessage(),
             ]);
             exit;

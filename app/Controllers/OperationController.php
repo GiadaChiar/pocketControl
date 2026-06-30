@@ -6,16 +6,18 @@ namespace App\Controllers;
 
 use PDO;
 use App\Services\OperationService;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use App\Services\AuthService;
+
 
 class OperationController
 {
     private OperationService $operationService;
+    private AuthService $authService;
 
     public function __construct(PDO $db)
     {
         $this->operationService = new OperationService($db);
+        $this->authService  = new AuthService();
     }
 
 
@@ -25,28 +27,15 @@ class OperationController
 
         try {
 
-            header('Content-Type: application/json');
-
-
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "AllGoals",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
 
             $data = json_decode(file_get_contents("php://input"), true);
@@ -104,27 +93,16 @@ class OperationController
     public function showAll(){
 
     try{
-        header('Content-Type: application/json');
-        $headers = getallheaders();
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
+                http_response_code(401);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "token scaduto, rieffettare l'accesso",
+                ]);
+                exit;
+            }
 
-        $authHeader = $headers['Authorization'] ?? null;
-
-        if (!$authHeader) {
-            http_response_code(401);
-
-            echo json_encode([
-                "success" => false,
-                "type" => "transaction",
-                "error" => "user token non disponibile, riprovare l'autentificazione"
-            ]);
-            exit;
-        }
-
-        $token = str_replace('Bearer ', '', $authHeader);
-
-        $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-        $userId = $decoded->user_id;
 
             //optional filters 
             $type = $_GET['type'] ?? null;
@@ -169,24 +147,16 @@ class OperationController
     public function delete($id)
     {
         try {
-            header('Content-Type: application/json');
-
-            $headers = getallheaders();
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
                 echo json_encode([
                     "success" => false,
-                    "error" => "Token mancante"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
 
-            $token = str_replace('Bearer ', '', $authHeader);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             $result = $this->operationService->delete((int)$id, (int)$userId);
 
@@ -233,27 +203,15 @@ class OperationController
     public function monthsOperations(){
         try{
 
-            header('Content-Type: application/json');
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "transaction",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             //optional filter 
             $start_date= $_GET['start_date'] ?? null;
@@ -294,27 +252,16 @@ class OperationController
     public function expenses(){
         try {
 
-            header('Content-Type: application/json');
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "transaction",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
 
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             //optional filter 
             $start_date = $_GET['start_date'] ?? null;

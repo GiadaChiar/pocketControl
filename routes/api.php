@@ -42,6 +42,8 @@ $router->get('/api/categories', [OperationController::class, 'categories']);
 //GOALS
 $router->get('/api/goals', [GoalController::class, 'showAll']);
 $router->post('/api/goals', [GoalController::class, 'insert']);
+//send id and new value to change it and add new transation 
+$router->post('/api/goals/transation', [GoalController::class, 'updateGoal']);
 //$router->delete('/api/goals/{id}', [GoalController::class, 'delete']);
 
 

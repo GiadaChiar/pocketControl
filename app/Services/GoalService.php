@@ -6,6 +6,8 @@ namespace App\Services;
 use App\Services\TransactionService;
 use App\Models\UserModel;
 use App\Models\GoalModel;
+use App\Models\OperationModel;
+use App\Services\MailService;
 
 
 
@@ -20,6 +22,9 @@ class GoalService
     private TransactionService $transaction;
     private UserModel $userModel;
     private GoalModel $goalModel;
+    private OperationModel $operationModel;
+    private MailService $mailService;
+
 
 
     public function __construct(PDO $db)
@@ -28,40 +33,42 @@ class GoalService
         $this->transaction = new TransactionService($db);
         $this->userModel = new UserModel($db);
         $this->goalModel = new GoalModel($db);
+        $this->operationModel = new OperationModel($db);
+        $this->mailService = new MailService();
     }
 
 
 
-    public function insert ($data, $idUser){
+    public function insert($data, $idUser)
+    {
 
-        
-        try{
-        //search by userID 
-        $existingUser = $this->userModel->findByField("id",$idUser);
 
-        if(!$existingUser){
-            throw new \Exception("Utente non registrato correttamente, effettuare il login");
-        }
+        try {
+            //search by userID 
+            $existingUser = $this->userModel->findByField("id", $idUser);
 
-        $idInsert = $this->goalModel->insert($data, $idUser);
-        
-        if(empty($idInsert)){
-            throw new \Exception("Errore durante l'inserimento della nuova transazione, riprovare");
-        }
+            if (!$existingUser) {
+                throw new \Exception("Utente non registrato correttamente, effettuare il login");
+            }
 
-        return $idInsert;
+            $idInsert = $this->goalModel->insert($data, $idUser);
 
+            if (empty($idInsert)) {
+                throw new \Exception("Errore durante l'inserimento della nuova transazione, riprovare");
+            }
+
+            return $idInsert;
         } catch (\Throwable $e) {
 
             throw new \Exception("Inserimento,non è stato completato");
-        
+
             exit;
         }
     }
 
 
     //get all bugets by range time
-    public function getAll($idUser, $data=null)
+    public function getAll($idUser, $data = null)
     {
         try {
             //search by userID 
@@ -96,5 +103,96 @@ class GoalService
         }
 
         return $this->goalModel->delete($id, $userId);
+    }
+
+
+
+
+    public function updateGoal(int $idGoal, float $new_value, int $userId)
+    {
+
+        //check if existing goal and get updateGoalcontroll with user
+
+        try {
+            //search by userID 
+            $data = $this->goalModel->getFromId($userId, $idGoal);
+
+            if (!$data) {
+                throw new \Exception("Obbiettivo non trovato");
+            }
+
+            $sum = (float)$data["current_amount"] + (float)$new_value;
+
+            $this->goalModel->update((int)$userId, (int)$idGoal, (float)$sum);
+
+           
+            //new insert operation stransfer goal name
+            $new_data = [
+                "category" => "obbiettivo",
+                "type" => "transfer",
+                "amount" => $new_value,
+                "description" => "Spostamento obiettivo: " . $data["description"],
+                "date" => date("Y-m-d")
+            ];
+
+
+
+            $idInsert = $this->operationModel->insert($new_data, (int)$userId);
+
+
+
+            //email logic 
+            $percentage = ($sum / $data["target_amount"]) * 100;
+
+        
+
+
+            $user = $this->userModel->findByField("id", $userId);
+
+
+            $email = $user["email"];
+            $name = $user["name"];
+
+            
+
+
+            //EMAIL >85%
+           
+
+                // EMAIL LOGIC
+                if ($percentage >= 20 ) {
+
+
+
+                    $this->mailService->sendGoalCongrats(
+                        $email,
+                        $name,
+                        $data["description"],
+                        $percentage
+                    );
+
+                    $this->goalModel->setEmail85Sent($idGoal);
+                }
+
+                if ($percentage >= 100 && !$data["email_100_sent"]) {
+
+                    $this->mailService->sendGoalCongrats(
+                        $email,
+                        $name,
+                        $data["description"],
+                        $percentage
+                    );
+
+                    $this->goalModel->setEmail100Sent($idGoal);
+                }
+            return [
+                "success" => true,
+                "data" => $sum,
+                "percentage" => $percentage
+            ];
+        } catch (\Throwable $e) {
+
+            throw new \Exception($e->getMessage());
+        }
     }
 }

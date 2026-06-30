@@ -3,13 +3,14 @@
 
 
 
-export default function PopUp({ alert, message, onClose }) {
+export function PopUp({ alert, message, current_message, onClose }) {
     return (
         <>
             <div className="custom-popup">
                 <div className="popup-box">
                     <h4>{alert}</h4>
                     <p>{message}</p>
+                    <p>{current_message}</p>
                     <button onClick={onClose}>
                         Chiudi
                     </button>
@@ -20,49 +21,65 @@ export default function PopUp({ alert, message, onClose }) {
 }
 
 
+//pop-up delete or update goals
 
-/*
-       const handleBarChar = async () => {
-   
-           if (getEndDate && getStartDate) {
-   
-               if (new Date(getEndDate) < new Date(getStartDate)) {
-                   setPopup({
-                       visible: true,
-                       alert: "Attenzione",
-                       message: "la data finale non può essere prima di quella iniziale",
-                   });
-                   return
-               }
-           }
-   
-           try {
-       
-               const res = await BarCharDate(
-                   getStartDate || null,
-                   getEndDate || null
-               )
-               if (res.success === false) {
-                   setPopup({
-                       visible: true,
-                       alert: "Attenzione",
-                       message: res.error,
-                   });
-               }
-               if (res.success === true) {
-                   const formatted = formatChartData(res.data)
-                   setChartData(formatted);
-                   }
-           } catch {
-               setPopup({
-                   visible: true,
-                   alert: "Problemi Tecnici",
-                   message: "La richiesta non è andata a buon fine. Riprovi per favore."
-               });
-               return;
-           }
-       }
-   
-       console.log("chartstart", getEndDate);
-       console.log("chartEnd", getStartDate);
-   */
+import { useState, useEffect } from "react";
+export function ConfirmModal({
+    visible,
+    title = "Conferma azione",
+    message,
+    current_message,
+    showInput = false,
+    inputValue = "",
+    onInputChange,
+    inputType = "number",
+    confirmText = "Conferma",
+    cancelText = "Annulla",
+    onConfirm,
+    onCancel,
+}) {
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+        if (visible) {
+            setValue(inputValue ?? "");
+        }
+    }, [visible, inputValue]);
+
+    if (!visible) return null;
+
+    return (
+        <div className="popup-overlay">
+            <div className="popup">
+
+                <h4>{title}</h4>
+
+                {message && <p>{message}</p>}
+                {current_message && <p>{current_message}</p>}
+
+                {showInput && (
+                    <input
+                        type={inputType}
+                        className="form-control"
+                        value={value}
+                        onChange={(e) => onInputChange(e.target.value)}
+                    />
+                )}
+
+                <div className="mt-3 d-flex gap-2">
+                    <button className="btn btn-secondary" onClick={onCancel}>
+                        {cancelText}
+                    </button>
+
+                    <button
+                        className="btn btn-success"
+                        onClick={() => onConfirm(value)}
+                    >
+                        {confirmText}
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    );
+}

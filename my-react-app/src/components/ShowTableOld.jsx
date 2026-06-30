@@ -14,11 +14,8 @@ export default function ShowTable() {
     const [getType, setType] = useState("");
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");
-
     const [tableType, setTableType] = useState("");
     const [tableData, setTableData] = useState([]);
-
-
     const [popup, setPopup] = useState({
         visible: false,
         alert: "",
@@ -29,9 +26,7 @@ export default function ShowTable() {
         setTableData([]);
     };
 
-
-
-
+    //delete
     const handleDelete = async (id) => {
 
         console.log("passo a delete ", id , getType)

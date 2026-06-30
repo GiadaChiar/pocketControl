@@ -42,8 +42,14 @@ class UserService
             );
         }
 
-        // 2.check if my password equal to db password
-        if ($password !== $user['password']) {
+        // 2.check if my password equal to db password PASSWORD IN CHIARO
+        /*if ($password !== $user['password']) {
+            throw new \Exception("Password errata, riprovare");
+        }*/
+
+
+
+            if (!password_verify($password, $user['password'])){
             throw new \Exception("Password errata, riprovare");
         }
 
@@ -61,11 +67,6 @@ class UserService
             $_ENV['JWT_SECRET'],
             'HS256'
         );
-
-
-        /*if ($token) {
-            return $token;
-        }*/
 
         if ($token) {
         echo json_encode([
@@ -89,8 +90,6 @@ class UserService
         return $this->transaction->run(
             function (PDO $db) use ($data) {
 
-
-
                 //1.check if already exist user search by email
                 $existing = $this->userModel->findByField("email",$data['email']);
 
@@ -111,4 +110,6 @@ class UserService
             }
         );
     }
+
+    
 }

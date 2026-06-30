@@ -7,20 +7,22 @@ use App\Services\BudgetService;
 use PDO;
 use App\Services\GoalService;
 use App\Services\OperationService;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use App\Services\AuthService;
+
 
 class FilterController
 {
     private GoalService $goalService;
     private OperationService $operationService;
     private BudgetService $budgetService;
+    private AuthService $authService;
 
     public function __construct(PDO $db)
     {
         $this->goalService = new GoalService($db);
         $this->operationService = new OperationService($db);
         $this->budgetService = new BudgetService($db);
+        $this->authService  = new AuthService();
     }
 
 
@@ -28,25 +30,15 @@ class FilterController
     public function filters()
     {
         try {
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             $data = json_decode(file_get_contents("php://input"), true);
 
@@ -115,28 +107,21 @@ class FilterController
         }
     }
 
+
+    
+
     public function delete()
     {
         try {
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             $data = json_decode(file_get_contents("php://input"), true);
 

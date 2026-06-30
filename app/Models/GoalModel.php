@@ -4,7 +4,8 @@ namespace App\Models;
 
 use PDO;
 
-class GoalModel{
+class GoalModel
+{
     private PDO $db;
 
     public function __construct(PDO $db)
@@ -12,10 +13,11 @@ class GoalModel{
         $this->db = $db;
     }
 
-    
-    public function get( int $idUser, array $data){
 
-    $query = "
+    public function get(int $idUser, array $data)
+    {
+
+        $query = "
     SELECT * FROM goals
     WHERE user_id = :user_id ";
 
@@ -41,7 +43,7 @@ class GoalModel{
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
 
-        $results= $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $results;
     }
@@ -49,7 +51,7 @@ class GoalModel{
 
     public function insert(array $data, int $userId): ?int
     {
-        
+
 
 
         $query = "
@@ -96,4 +98,89 @@ class GoalModel{
             ":user_id" => $userId
         ]);
     }
+
+
+    public function getFromId(int $userId, int $id)
+    {
+        $stmt = $this->db->prepare("
+        SELECT current_amount, target_amount, description  FROM goals
+        WHERE id = :id AND user_id = :user_id
+    ");
+
+        $stmt->execute([
+            ":id" => $id,
+            ":user_id" => $userId
+        ]);
+
+        $current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if ($current) {
+            return $current;
+        } else {
+            return null;
+        }
+    }
+
+
+    public function update($userId,$id, $sum)
+    {
+        $stmt = $this->db->prepare("
+        UPDATE goals
+        SET current_amount = :current
+        WHERE id = :id AND user_id = :user_id
+    ");
+
+        $stmt->execute([
+            ":id" => $id,
+            ":user_id" => $userId,
+            ":current" =>$sum
+        ]);
+
+        $current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if ($current) {
+            return $current;
+        } else {
+            return null;
+        }
+
+    }
+
+
+
+    public function setEmail85Sent(int $idGoal): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE goals
+            SET email_85_sent = 1
+            WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ":id" => $idGoal
+        ]);
+    }
+
+
+
+
+
+    public function setEmail100Sent(int $idGoal): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE goals
+            SET email_100_sent = 1
+            WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ":id" => $idGoal
+        ]);
+    }
 }
+
+
+
+

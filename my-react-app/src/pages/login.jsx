@@ -1,6 +1,6 @@
 import Title from "../components/title";
 import Input from "../components/input";
-import PopUp from "../components/popUp";
+import { PopUp } from "../components/popUp";
 import Menu from "../components/menu";
 import "../style/user.scss";
 import "../style/popUp.scss";
@@ -38,11 +38,10 @@ export function LogIn() {
 
         try {
             const user = await loginService(
-                credentials.email,
-                credentials.password
+                credentials.email.trim().toLowerCase(),
+                credentials.password.trim()
             );
 
-            //if (user.type === "login") {
             console.log("arrivato richiesta", user.type)
             if (user.success === false) {
                 setPopup({
@@ -68,10 +67,10 @@ export function LogIn() {
 
                     setTimeout(() => {
                         navigate("/dashboard");
-                    }, 1200); // 1.2 secondi
+                    }, 1200); // 1.2 scond
                 }
                 return;
-                //}
+                
             }
         } catch {
             setPopup({

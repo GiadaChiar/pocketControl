@@ -1,7 +1,7 @@
 
 
 
-export function TableGoal({data=[], onDelete, onClean}) {
+export function TableGoal({data=[], onDelete, onClean, onAdd}) {
     return (
         <>
             <table className="table">
@@ -11,6 +11,7 @@ export function TableGoal({data=[], onDelete, onClean}) {
                         <th scope="col">Attuale</th>
                         <th scope="col">Data</th>
                         <th scope="col">Descrizione</th>
+                        <th></th>
                         <th>
                             <button
                                 className="btn btn-danger btn-sm"
@@ -28,6 +29,13 @@ export function TableGoal({data=[], onDelete, onClean}) {
                             <td>{row.current_amount}</td> 
                             <td>{row.date}</td> 
                             <td>{row.description}</td> 
+                            <td><button
+                                className="btn btn-danger btn-plus"
+                                onClick={() => onAdd(row)}
+                            >
+                                +
+                            </button>
+                            </td>
                             <td><button
                                 className="btn btn-danger btn-sm"
                                 onClick={() => onDelete(row.id)}

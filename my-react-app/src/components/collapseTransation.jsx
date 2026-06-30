@@ -2,9 +2,8 @@ import Input from "./input";
 import Button from "./button";
 import DataInput from "./datainput";
 import { useState, useEffect } from "react";
-import PopUp from "../components/popUp";
+import { PopUp } from "../components/popUp";
 import DropDown from "../components/dropdown";
-//import { validationInput } from "../function/Validation";
 import { NewTransation } from "../services/transactionService";
 import "../style/popUp.scss";
 import { CategoriesFetch } from "../api/transactionApi";
@@ -58,19 +57,14 @@ export default function CollapseTransation() {
 
 
     const handleTransection = async () => {
-        if (!getAmount || !getType || !getDate) {
+        if (getAmount === "" || getAmount <= 0 || !getType || !getDate) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
-                message: "Compila tutti i capi obbligatotri",
+                message: "Compila tutti i capi obbligatotri, non sono ammaessi valori uguali o inferiori allo zero",
             });
             return;
         }
-
-        /*  console.log("taget", getTarget);
-          console.log("current", getCurrent);
-          console.log("description", getDescription);
-          console.log("date", getDate);*/
 
         const categoryToSave =
             getCategory === "custom"

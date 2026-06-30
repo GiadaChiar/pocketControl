@@ -140,8 +140,6 @@ class OperationService
         } catch (\Throwable $e) {
 
             throw new \Exception($e->getMessage());
-            return null;
-            exit;
         }
     }
 

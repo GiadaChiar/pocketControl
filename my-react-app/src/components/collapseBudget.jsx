@@ -3,7 +3,7 @@ import Input from "./input";
 import Button from "./button";
 import DataInput from "./datainput";
 import { useState } from "react";
-import PopUp from "../components/popUp";
+import { PopUp } from "../components/popUp";
 import { NewBudget } from "../services/budgetService";
 import "../style/popUp.scss";
 
@@ -23,11 +23,11 @@ export default function CollapseBudget() {
     });
 
     const handleBudget = async () => {
-        if (!getStartDate || !getEndDate || !getLimit) {
+        if (!getStartDate || !getEndDate || getLimit === "" || Number(getLimit )<= 0) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
-                message: "Compila tutti i capi obbligatotri",
+                message: "Compila tutti i capi obbligatotri, i valori minori e uguali a 0 non sono ammessi",
             });
             return;
         }

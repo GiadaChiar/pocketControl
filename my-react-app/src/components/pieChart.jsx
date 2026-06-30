@@ -1,5 +1,5 @@
 import DataInput from "./datainput";
-import PopUp from "./popUp";
+import { PopUp } from "./popUp";
 import Button from "./button";
 import PieChartWith from "./charts/graphicPieChart";
 import "../style/popUp.scss";

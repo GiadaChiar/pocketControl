@@ -6,42 +6,31 @@ namespace App\Controllers;
 
 use PDO;
 use App\Services\GoalService;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use App\Services\AuthService;
 
 class GoalController
 {
     private GoalService $goalService;
+    private AuthService $authService;
 
     public function __construct(PDO $db)
     {
         $this->goalService = new GoalService($db);
+        $this->authService  = new AuthService();
     }
 
     public function showAll(){
         try{
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "AllGoals",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
         
-
             $goals = $this->goalService->getALL($userId);
 
             if ($goals) {
@@ -73,54 +62,34 @@ class GoalController
 
     public function insert()
     {
-
-
-
         try {
 
-            header('Content-Type: application/json');
-
-
-            $headers = getallheaders();
-
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if(!$userId){
                 http_response_code(401);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "insertGoal",
-                    "error" => "user token non disponibile, riprovare l'autentificazione"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
 
-            $token = str_replace('Bearer ', '', $authHeader);
-
-            
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
-
-
-
             $data = json_decode(file_get_contents("php://input"), true);
+
 
             $date= $data['date'] ?? null;
             $target_amount = $data['target_amount'] ?? null;
-            $current_amount = $data['current_amount'] ?? null;
+            $current_amount = $data['current_amount'] ?? 0;
             $description = $data['description'] ?? null;
             unset($data['request']);
 
 
 
-            if (empty($userId) || empty($current_amount) || empty($target_amount) || empty($date)) {
+            if (empty($userId) || empty($target_amount) || empty($date)) {
                 http_response_code(400);
 
                 echo json_encode([
                     "success" => false,
-                    "type" => "insertGoal",
                     "error" => "Campi mancanti o incorretti",
                     "date" => $date
                 ]);
@@ -137,7 +106,6 @@ class GoalController
 
                 echo json_encode([
                     "success" => true,
-                    "type" => "transaction",
                     "data" =>  $IdGoal
                 ]);
                 exit;
@@ -147,7 +115,6 @@ class GoalController
 
             echo json_encode([
                 "success" => false,
-                "type" => "transaction",
                 "error" => $e->getMessage(),
             ]);
             exit;
@@ -160,24 +127,16 @@ class GoalController
     public function delete($id)
     {
         try {
-            header('Content-Type: application/json');
 
-            $headers = getallheaders();
-            $authHeader = $headers['Authorization'] ?? null;
-
-            if (!$authHeader) {
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
                 http_response_code(401);
                 echo json_encode([
                     "success" => false,
-                    "error" => "Token mancante"
+                    "error" => "token scaduto, rieffettare l'accesso",
                 ]);
                 exit;
             }
-
-            $token = str_replace('Bearer ', '', $authHeader);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-
-            $userId = $decoded->user_id;
 
             $result = $this->goalService->delete((int)$id, (int)$userId);
 
@@ -192,6 +151,65 @@ class GoalController
                 "success" => false,
                 "error" => $e->getMessage()
             ]);
+        }
+    }
+
+
+
+    //update goal and add transation
+    public function updateGoal(){
+        try {
+
+            $userId = $this->authService->getUserIdFromRequest();
+            if (!$userId) {
+                http_response_code(401);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "token scaduto, rieffettare l'accesso",
+                ]);
+                exit;
+            }
+
+            $date = json_decode(file_get_contents("php://input"), true);
+
+            $idGoal= $date['idGoal'] ?? null;
+            $new_value = $date['newValue'] ?? null;
+
+            
+
+            if(!$idGoal || !$new_value){
+
+                http_response_code(401);
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Dati incompleti o mancanti, riprovare",
+                ]);
+                exit;
+            }
+
+            $data = $this ->goalService->updateGoal($idGoal,$new_value, $userId);
+
+
+            if($data){
+
+                http_response_code(200);
+
+                echo json_encode([
+                    "success" => true,
+                    "data" =>  $data
+                ]);
+                exit;
+            }
+
+        } catch (\Throwable $e) {
+            http_response_code(401);
+
+            echo json_encode([
+                "success" => false,
+                "type" => "transaction",
+                "error" => $e->getMessage(),
+            ]);
+            exit;
         }
     }
 }
