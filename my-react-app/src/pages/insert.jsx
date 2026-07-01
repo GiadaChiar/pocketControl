@@ -14,15 +14,15 @@ function Insert() {
         <>
             <Menu />
             <div className="insert-page">
-            <h1>Inserimenti e controlli</h1>
-            <div id="collapses">
-                <CollapseGoald />
-                <CollapseBudget/>
-                <CollapseTransation />
+                <h1>Inserimenti e controlli</h1>
+                <div id="collapses">
+                    <CollapseGoald />
+                    <CollapseBudget />
+                    <CollapseTransation />
                     <div id="filters_table">
-                    <h3 className ="titleTable">Cerca ed elimina gli inserimenti</h3>
-                    <ShowTable/>
-                </div>
+                        <h3 className="titleTable">Cerca ed elimina gli inserimenti</h3>
+                        <ShowTable />
+                    </div>
                 </div>
             </div>
         </>

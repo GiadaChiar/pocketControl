@@ -1,4 +1,4 @@
-@use 'variables.scss' as vars;
+@use "variables.scss" as vars;
 
 .user-page {
     margin: 20px;
@@ -8,20 +8,20 @@
     position: relative;
     padding: 15px;
     background-color: vars.$color32;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
 
     &::before,
     &::after {
-    content: "";
-    position: fixed;
-    width: 150vw;
-    height: 150vw;
-    border-radius: 45%;
-    pointer-events: none;
+        content: "";
+        position: fixed;
+        width: 150vw;
+        height: 150vw;
+        border-radius: 45%;
+        pointer-events: none;
     }
-        
+
     &::before {
         background: vars.$color4;
         top: 10vw;
@@ -36,55 +36,51 @@
         right: -30vw;
         left: 30vw;
         animation: rotateBlobReverse 35s linear infinite;
-        //z-index: -1;
     }
 
-        //title 
+    //title
 
-        .over{
-            position: relative;
-            z-index: 5;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
+    .over {
+        position: relative;
+        z-index: 5;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
 
-        .title{
+        .title {
             font-family: vars.$font1;
             font-size: vars.$font-size4;
-            color:vars.$color25;
+            color: vars.$color25;
             margin-bottom: 20px;
             margin-top: 40px;
-            text-shadow:
-                -1px -1px 0 vars.$color1;
-                font-weight: 800;
+            text-shadow: -1px -1px 0 vars.$color1;
+            font-weight: 800;
         }
 
-        h2{
+        h2 {
             margin-bottom: 60px;
-            text-shadow:
-            -1px -1.5px 0 vars.$color2;
+            text-shadow: -1px -1.5px 0 vars.$color2;
             font-weight: 700;
             font-size: vars.$font-size5;
         }
 
-
-        .navbar-brand{
+        .navbar-brand {
             font-family: vars.$font1;
             font-size: vars.$font-size7;
             text-decoration: underline;
 
-            &:hover{
-                color:vars.$color25;
+            &:hover {
+                color: vars.$color25;
             }
         }
     }
 }
 
-
 @keyframes rotateBlob {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -94,6 +90,7 @@
     from {
         transform: rotate(360deg);
     }
+
     to {
         transform: rotate(0deg);
     }

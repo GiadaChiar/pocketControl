@@ -1,44 +1,42 @@
+@use 'variables.scss' as vars;
 
-    @use 'variables.scss' as vars;
-    
-    
-#form{
-    background: radial-gradient(
-                circle,
-                vars.$color32 60%,
-                rgba(vars.$color4, 0.6) 80%,
-                rgba(vars.$color3, 0) 100%
-                );
-        margin-top: 60px;
-        padding-left: 50px;
-        padding-right: 30px;
-        color: vars.$color25;
-        font-family: vars.$font1;
-        font-size: vars.$font-size6;
-        margin-bottom: 10px;
-        box-shadow: 0 0 15px vars.$color6;
 
-    p{
+#form {
+    background: radial-gradient(circle,
+            vars.$color32 60%,
+            rgba(vars.$color4, 0.6) 80%,
+            rgba(vars.$color3, 0) 100%);
+    margin-top: 60px;
+    padding-left: 50px;
+    padding-right: 30px;
+    color: vars.$color25;
+    font-family: vars.$font1;
+    font-size: vars.$font-size6;
+    margin-bottom: 10px;
+    box-shadow: 0 0 15px vars.$color6;
+
+    p {
         font-family: vars.$font1;
         padding-top: 20px;
         padding-bottom: 15px;
     }
-    button{
+
+    button {
         background-color: vars.$color2;
         margin-bottom: 50px;
     }
 
-    #question{
+    #question {
         text-shadow:
-                -1px -1px 0 vars.$color3;
-                font-weight: 800;
+            -1px -1px 0 vars.$color3;
+        font-weight: 800;
     }
 }
 
 
 //change color button send
-#submit{
-    color:vars.$color2;
+#submit {
+    color: vars.$color2;
     box-shadow: 0 0 15px vars.$color2;
     background: vars.$color5 !important;
     margin-bottom: 30px;
@@ -46,10 +44,10 @@
     min-width: 100px;
     border-color: vars.$color2;
 
-    &:hover{
-            color:vars.$color25;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 1);
-        }
+    &:hover {
+        color: vars.$color25;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+    }
 
 }
 
@@ -58,9 +56,7 @@
 /* Responsive */
 /*pc */
 @media (min-width: 900px) {
-#question{
+    #question {
         font-size: vars.$font-size5;
     }
 }
-
-

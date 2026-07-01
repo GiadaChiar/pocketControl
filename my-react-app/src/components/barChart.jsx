@@ -101,7 +101,7 @@ export default function BarChar() {
                         {getTitle}
                     </h3>
                     <div className="inLine">
-                        
+
                         <SimpleBarChart data={chartData} />
 
                         <AreaChartExample data={chartData} />

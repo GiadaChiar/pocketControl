@@ -34,7 +34,6 @@ export default function PieChar() {
                 });
                 return
             }
-            console.log("passo", start, end, type)
 
             const res = await PieCharDate(start, end, type);
 
@@ -61,7 +60,7 @@ export default function PieChar() {
                 setChartData(formatted);
                 setTitle(res.title);
             }
-            
+
 
         } catch {
             setPopup({

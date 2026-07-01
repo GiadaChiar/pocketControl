@@ -24,8 +24,6 @@ class BudgetController
     //insert new buget
     public function insert()
     {
-
-
         try {
 
             $userId = $this->authService->getUserIdFromRequest();
@@ -37,17 +35,11 @@ class BudgetController
                 ]);
                 exit;
             }
-
-
             $data = json_decode(file_get_contents("php://input"), true);
-
-    
             $start_date = $data["start_date"] ?? null;
             $end_date = $data["end_date"] ?? null;
             $limit_amount = $data['limit_amount'] ?? null;
             $description = $data['description'] ?? null;
-
-
 
             if (empty($userId) || empty($limit_amount) || empty($start_date) || empty($end_date)) {
                 http_response_code(400);
@@ -59,14 +51,11 @@ class BudgetController
                 exit;
             }
 
-
             // ckeck user_id 
             $IdBudget = $this->budgetService->insert($data, $userId);
 
             if ($IdBudget) {
-
                 http_response_code(200);
-
                 echo json_encode([
                     "success" => true,
                     "data" =>  $IdBudget
@@ -84,26 +73,16 @@ class BudgetController
         }
     }
 
+
+
     //get all bugets 
     public function showAll()
     {
         try {
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
-
             $goals = $this->budgetService->getALL($userId);
-
             if ($goals) {
                 http_response_code(200);
-
                 echo json_encode([
                     "success" => true,
                     "data" => $goals
@@ -113,7 +92,6 @@ class BudgetController
         } catch (\Throwable $e) {
 
             http_response_code(401);
-
             echo json_encode([
                 "success" => false,
                 "error" => $e->getMessage()
@@ -123,19 +101,11 @@ class BudgetController
     }
 
 
+//delete budget
     public function delete($id)
     {
         try {
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
             $result = $this->budgetService->delete((int)$id, (int)$userId);
 
             echo json_encode([
@@ -155,20 +125,11 @@ class BudgetController
 
 
 
-
+// sum of budget
     public function bugetSummary()
     {
         try {
-
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
 
             //optional filter 
             $start_date = $_GET['start_date'] ?? null;
@@ -191,16 +152,6 @@ class BudgetController
                 exit;
             }
 
-
-
-/*
-            if ($start_date && $end_date) {
-                $results = $this->budgetService->getBudgetSummary($userId, $start_date, $end_date);
-            } else {
-                exit;
-                $results = $this->operationService->allBugets($userId);
-            }
-*/
             if ($results) {
                 http_response_code(200);
 

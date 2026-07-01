@@ -1,4 +1,4 @@
-import { insertGoal, UpdateGoal } from "../api/goalApi";
+import { InsertGoal, UpdateGoal } from "../api/goalApi";
 
 export async function NewGoal(
     date,
@@ -6,12 +6,11 @@ export async function NewGoal(
     current_amount,
     description
 ) {
-    return await insertGoal({
+    return await InsertGoal({
         date,
         target_amount,
         current_amount,
-        description 
-
+        description
     });
 }
 
@@ -20,7 +19,7 @@ export async function ChangeGoal(
     idGoal,
     newValue
 
-){
+) {
     return await UpdateGoal({
         idGoal,
         newValue

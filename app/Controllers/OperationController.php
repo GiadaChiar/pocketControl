@@ -20,57 +20,34 @@ class OperationController
         $this->authService  = new AuthService();
     }
 
-
+    //new operation
     public function insert()
     {
-
-
         try {
 
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
-
             $data = json_decode(file_get_contents("php://input"), true);
-
             $category = $data['category'] ?? null;
             $type = $data['type'] ?? null;
             $amount = $data['amount'] ?? null;
-            $description = $data['description'] ?? null;
             $date = $data["date"] ?? null;
             unset($data['request']);
 
-
-
             if (empty($userId) || empty($category) || empty($type) || empty($amount) || empty($date)) {
                 http_response_code(400);
-
                 echo json_encode([
                     "success" => false,
-                    "type" => "transaction",
                     "error" => "Campi mancanti o incorretti"
                 ]);
                 exit;
             }
-
-
             // ckeck user_id 
             $IdOperation = $this->operationService->insert($data, $userId);
 
             if ($IdOperation) {
-
                 http_response_code(200);
-
                 echo json_encode([
                     "success" => true,
-                    "type" => "transaction",
                     "data" =>  $IdOperation
                 ]);
                 exit;
@@ -80,7 +57,6 @@ class OperationController
 
             echo json_encode([
                 "success" => false,
-                "type" => "transaction",
                 "error" => $e->getMessage(),
             ]);
             exit;
@@ -89,51 +65,43 @@ class OperationController
 
 
 
-
+    //get operations
     public function showAll(){
 
     try{
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
-
             //optional filters 
             $type = $_GET['type'] ?? null;
             $category = $_GET['category'] ?? null;
 
+            $field = null;
+            $value = null;
 
-            if($type || $category){
+            if ($category || $type) {
+                $field = $category ? "category" : "type";
+                $value = $category ?? $type;
+
                 $operations = $this->operationService->getALL(
-                (int)$userId,
-                $category ? "category" : "type",
-                $category ?? $type
+                    (int)$userId,
+                    $field,
+                    $value
                 );
-            }
-            else{
-                $operations = $this->operationService->getALL($userId);
+            } else {
+                $operations = $this->operationService->getALL((int)$userId);
             }
 
-        if ($operations) {
-                http_response_code(200);
+            echo json_encode([
+                "success" => true,
+                "type" => "transaction",
+                "data" => $operations ?? []
+            ]);
+            exit;
 
-                echo json_encode([
-                    "success" => true,
-                    "type" => "transaction",
-                    "data" => $operations
-                ]);
-                exit;
-            }
+            http_response_code(200);
+        
         } catch (\Throwable $e) {
 
             http_response_code(401);
-
             echo json_encode([
                 "success" => false,
                 "type" => "transaction",
@@ -143,21 +111,13 @@ class OperationController
         }
     }
 
+    
 
+    //delete operation
     public function delete($id)
     {
         try {
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
-
             $result = $this->operationService->delete((int)$id, (int)$userId);
 
             echo json_encode([
@@ -175,6 +135,7 @@ class OperationController
     }
 
 
+    //get all categories fields
     public function categories(){
         try {
         $results = $this->operationService->category();
@@ -199,20 +160,12 @@ class OperationController
     }
 
 
-    
+
+    // sum of the operation for every months by categories
     public function monthsOperations(){
         try{
 
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
             //optional filter 
             $start_date= $_GET['start_date'] ?? null;
             $end_date =  $_GET['end_date'] ?? null;
@@ -249,29 +202,17 @@ class OperationController
 
 
 
+    //sum of expenses filter by category and /or time range
     public function expenses(){
         try {
 
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
-
             //optional filter 
             $start_date = $_GET['start_date'] ?? null;
             $end_date =  $_GET['end_date'] ?? null;
             $type = $_GET['typology'] ?? null;
 
-
-
             //default spesa
-
             if($type){
                 if ($start_date && $end_date) {
                     $results = $this->operationService->allExpenses($userId, $type,$start_date, $end_date);
@@ -298,7 +239,6 @@ class OperationController
         } catch (\Throwable $e) {
 
             http_response_code(401);
-
             echo json_encode([
                 "success" => false,
                 "error" => $e->getMessage()
@@ -308,7 +248,32 @@ class OperationController
     }
 
 
+    // get sum of all entry total
+    
+    public function allEntry()
+    {
+        try {
 
+            $userId = $this->authService->getUserIdFromRequest();
+            
+            $result = $this-> operationService->getTotalEntry((int)$userId);
+            if ($result) {
+                http_response_code(200);
 
+                echo json_encode([
+                    "success" => true,
+                    "data" => $result
+                ]);
+                exit;
+            }
+        } catch (\Throwable $e) {
 
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "error" => $e->getMessage()
+            ]);
+            exit;
+        }
+    }
 }

@@ -15,7 +15,7 @@ export default function CollapseBudget() {
     const [getEndDate, setEndDate] = useState("");
     const [getLimit, setLimit] = useState("");
     const [getDescription, setDescription] = useState("");
-    
+
     const [popup, setPopup] = useState({
         visible: false,
         alert: "",
@@ -23,7 +23,7 @@ export default function CollapseBudget() {
     });
 
     const handleBudget = async () => {
-        if (!getStartDate || !getEndDate || getLimit === "" || Number(getLimit )<= 0) {
+        if (!getStartDate || !getEndDate || getLimit === "" || Number(getLimit) <= 0) {
             setPopup({
                 visible: true,
                 alert: "Attenzione",
@@ -40,13 +40,6 @@ export default function CollapseBudget() {
             });
             return
         }
-
-        console.log("taget", getEndDate);
-        console.log("current", getStartDate);
-        console.log("description", getDescription);
-        console.log("date", getLimit);
-
-
 
         try {
             const user = await NewBudget(
@@ -70,7 +63,7 @@ export default function CollapseBudget() {
                     alert: "Registrazione eseguita",
                     message: "Budget inserito"
                 });
-                
+
                 return;
             }
 

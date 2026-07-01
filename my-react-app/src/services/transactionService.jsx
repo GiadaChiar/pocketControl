@@ -1,5 +1,5 @@
 
-import { insertTransaction, filterBarChar, filterPieChar, bugetSummary, TotalEntry } from "../api/transactionApi";
+import { InsertTransaction, FilterBarChar, FilterPieChar, TotalEntry } from "../api/transactionApi";
 import { searchFilter } from "../api/filterService";
 
 
@@ -10,9 +10,9 @@ export async function NewTransation(
     amount,
     date,
     description,
-    
-    ) {
-    return await insertTransaction({
+
+) {
+    return await InsertTransaction({
         category,
         type,
         amount,
@@ -25,7 +25,7 @@ export async function BarCharDate(
     start_date,
     end_date
 ) {
-    return await filterBarChar({
+    return await FilterBarChar({
         start_date,
         end_date
     })
@@ -38,7 +38,7 @@ export async function PieCharDate(
     end_date,
     typology
 ) {
-    return await filterPieChar({
+    return await FilterPieChar({
         start_date,
         end_date,
         typology
@@ -58,16 +58,7 @@ export async function NeedleChar(
     })
 }
 
-//chartBugets
-export async function BugetsChar(
-    start_date,
-    end_date,
-) {
-    return await bugetSummary({
-        start_date,
-        end_date
-    })
-}
+
 
 
 export async function Total() {

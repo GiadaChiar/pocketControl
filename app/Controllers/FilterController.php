@@ -31,18 +31,7 @@ class FilterController
     {
         try {
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
             $data = json_decode(file_get_contents("php://input"), true);
-
-
 
             if ($data["tipology"] === "goals") {
                 $results = $this->goalService->getAll($userId, $data);
@@ -97,7 +86,6 @@ class FilterController
         } catch (\Throwable $e) {
 
             http_response_code(401);
-
             echo json_encode([
                 "success" => false,
                 "type" => "AllGoals",
@@ -108,23 +96,12 @@ class FilterController
     }
 
 
-    
-
+//delete for different category (table)
     public function delete()
     {
         try {
             $userId = $this->authService->getUserIdFromRequest();
-            if (!$userId) {
-                http_response_code(401);
-                echo json_encode([
-                    "success" => false,
-                    "error" => "token scaduto, rieffettare l'accesso",
-                ]);
-                exit;
-            }
-
             $data = json_decode(file_get_contents("php://input"), true);
-
 
             if ($data["type"] === "goals") {
                 $idElement = $this->goalService->delete($data["id"], $userId);
@@ -154,8 +131,6 @@ class FilterController
             }
 
             if ($data["type"] === "budgets") {
-
-
 
                 $idElement = $this->budgetService->delete($data["id"], $userId);
 

@@ -1,65 +1,68 @@
 @use "variables.scss" as vars;
 
-html, body {
+html,
+body {
     height: 100%;
     overflow-y: auto !important;
 }
 
-    .insert-page {
+.insert-page {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-image: url("../assets/insert.jpeg");
+    font-family: vars.$font1;
+
+
+    .btn.btn-primary {
         width: 100%;
-        min-height: 100vh;
-        position: relative;
-        background-image: url("../assets/insert.jpeg"); 
-        font-family: vars.$font1;
+        padding: 15px;
+        border: 2px solid vars.$color25;
+        background-color: vars.$color32;
+        font-family: vars.$font-size4;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+        border-style: double;
+        font-weight: 600;
 
+    }
 
-        .btn.btn-primary{
-            width: 100%;
-            padding:15px;
-            border:2px solid vars.$color25;
-            background-color: vars.$color32;
-            font-family: vars.$font-size4;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-            border-style: double;
-            font-weight: 600;
-            
+    #filter {
+        margin-top: 50px;
+
+        h3 {
+            margin-bottom: 50px;
         }
 
-        #filter{
-            margin-top: 50px;
-            h3{
-                margin-bottom: 50px;
-            }
-            .dropdown{
-                margin-bottom: 30px;
+        .dropdown {
+            margin-bottom: 30px;
+        }
+    }
+
+    //table section 
+    .table {
+        margin-bottom: 90px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+
+        .btn.btn-danger.btn-sm {
+            background-color: vars.$color3;
+            border-color: vars.$color25;
+
+            &:hover {
+                background-color: vars.$color25;
             }
         }
 
-        //table section 
-        .table{
-            margin-bottom:90px ;
+        .btn.btn-danger.btn-plus {
+            background-color: vars.$color6;
+            color: vars.$color25;
+            border-color: vars.$color25;
 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-            .btn.btn-danger.btn-sm{
-                background-color: vars.$color3;
-                border-color: vars.$color25;
-
-                &:hover{
-                    background-color: vars.$color25;
-                }
-            }
-
-            .btn.btn-danger.btn-plus{
-                background-color: vars.$color6;
-                color:vars.$color25;
-                border-color: vars.$color25;
-                &:hover{
+            &:hover {
 
                 background-color: vars.$color4;
                 border-color: vars.$color25;
-                color:vars.$color25;
-                }
+                color: vars.$color25;
             }
         }
-
     }
+}

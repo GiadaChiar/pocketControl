@@ -5,7 +5,7 @@ import Button from "./button";
 import BudgetLinearChart from "./charts/budget";
 import "../style/popUp.scss";
 import { useState, useEffect } from "react";
-import { BugetsChar } from "../services/transactionService";
+import { BugetsChar } from "../services/budgetService";
 import { getCurrentMonthRange } from "../function/CurrentMonth";
 
 
@@ -57,8 +57,6 @@ export default function BudgetChar() {
                 return;
             }
 
-            /*const formatted = formatPieData(res.data || []);
-            setChartData(formatted);*/
 
             setChartData(res.data);
             setTitle(title);

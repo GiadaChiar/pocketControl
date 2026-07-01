@@ -25,14 +25,11 @@ export function formatChartData(data) {
         grouped[key].totale =
             grouped[key].entrate - grouped[key].spese;
     });
-
-    console.log("modificato : ", grouped)
-
     return Object.values(grouped);
 }
 
 
-export function formatPieData(data){
+export function formatPieData(data) {
     const format = data.map(item => ({
         category: item.category,
         total: Number(item.total)

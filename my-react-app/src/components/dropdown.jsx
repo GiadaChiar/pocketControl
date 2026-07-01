@@ -7,10 +7,10 @@ import { useState } from "react";
 export default function DropDown({ label, id, options, onSelect }) {
 
     //check selection 
-    const [selectedLabel, setSelected] = useState  (null);
+    const [selectedLabel, setSelected] = useState(null);
 
     //if I click get value and label, use it onSelect
-    const handleClick = (e,option) => {
+    const handleClick = (e, option) => {
         e.preventDefault();
         setSelected(option);
         onSelect(option.value, option.label);

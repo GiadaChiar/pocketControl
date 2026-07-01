@@ -103,4 +103,63 @@ class BudgetModel
             ":user_id" => $userId
         ]);
     }
+
+    //if there are budgets
+    public function findBugetByDate(int $userId, string $date):?array{
+
+
+
+        $query = "
+            SELECT * FROM budgets
+            WHERE user_id= :user_id
+            AND :date BETWEEN 
+            start_date AND end_date 
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ":user_id"     => $userId,
+            ":date"    => $date,
+        ]);
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+
+        return $results ?: null;
+
+    }
+
+
+
+
+
+    public function setEmail85Sent(int $idBudget): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE budgets
+            SET email_85_sent = 1
+            WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ":id" =>  $idBudget
+        ]);
+    }
+
+
+
+
+
+    public function setEmail100Sent(int  $idBudget): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE budgets
+            SET email_100_sent = 1
+            WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ":id" =>  $idBudget
+        ]);
+    }
 }

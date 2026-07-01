@@ -14,14 +14,14 @@ export function CategoriesFetch() {
 }
 
 
-export function insertTransaction(data) {
+export function InsertTransaction(data) {
     return apiRequestToken("/api/operations", {
         method: "POST",
         body: JSON.stringify(data)
     });
 }
 
-export function filterBarChar(data) {
+export function FilterBarChar(data) {
     const params = new URLSearchParams();
 
     if (data.start_date) {
@@ -44,7 +44,7 @@ export function filterBarChar(data) {
 
 
 
-export function filterPieChar(data) {
+export function FilterPieChar(data) {
     const params = new URLSearchParams();
 
     if (data.start_date) {
@@ -68,7 +68,7 @@ export function filterPieChar(data) {
 }
 
 
-export function filterNeedleChart(data) {
+export function FilterNeedleChart(data) {
     const params = new URLSearchParams();
 
     if (data.start_date) {
@@ -91,32 +91,11 @@ export function filterNeedleChart(data) {
     );
 }
 
-export function bugetSummary(data) {
-    const params = new URLSearchParams();
-
-    if (data.start_date) {
-        params.append("start_date", data.start_date);
-    }
-
-    if (data.end_date) {
-        params.append("end_date", data.end_date);
-    }
-
-    return apiRequestToken(
-        `/api/bugetSummary?${params.toString()}`,
-        {
-            method: "GET"
-        }
-    );
-
-}
-
 
 export function TotalEntry() {
-    const params = new URLSearchParams();
 
     return apiRequestToken(
-        `/api/bugetSummary?${params.toString()}`,
+        "/api/allEntry",
         {
             method: "GET"
         }

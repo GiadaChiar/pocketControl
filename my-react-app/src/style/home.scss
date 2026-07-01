@@ -5,7 +5,7 @@
     min-height: 100vh;
     overflow-y: auto;
 
-    background-image: url("../assets/city.jpeg"); 
+    background-image: url("../assets/city.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -24,7 +24,7 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        
+
         //circle image
         .circle-wrapper {
             display: flex;
@@ -72,79 +72,76 @@
     }
 
 
-    
-    
-//button section 
-.center.buttons{
-    position: relative;
-    z-index: 6;
-    gap: 20px;
-    justify-content: space-around;
 
 
-    .home_btn{
-        padding: 5px;
-        font-family: vars.$font1;
-        color:vars.$color2;
-        width: 150px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-        border-radius: 15%;
-        border-style:double;
-        border-color: vars.$color2;
-        background: vars.$color5;
-        margin-top: 50px;
-        
-        &:hover{
-            color:vars.$color25;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+    //button section 
+    .center.buttons {
+        position: relative;
+        z-index: 6;
+        gap: 20px;
+        justify-content: space-around;
+
+
+        .home_btn {
+            padding: 5px;
+            font-family: vars.$font1;
+            color: vars.$color2;
+            width: 150px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            border-radius: 15%;
+            border-style: double;
+            border-color: vars.$color2;
+            background: vars.$color5;
+            margin-top: 50px;
+
+            &:hover {
+                color: vars.$color25;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+            }
         }
     }
-}
 
 
     //text section 
 
-    .under{
-            max-width: 40%;
-            
-            h1{
-                
-                font-family: vars.$font1;
-                color:vars.$color2;
-                text-shadow:
+    .under {
+        max-width: 40%;
+
+        h1 {
+
+            font-family: vars.$font1;
+            color: vars.$color2;
+            text-shadow:
                 -1px -1px 0 vars.$color3;
-                font-weight: 800;
-            }
-            #textHome{
-                width: 100%;
-                padding: 15px;
-                border-radius: 15%;
-                box-shadow: 0 0 150px vars.$color6;
-                background: radial-gradient(
-                    circle,
+            font-weight: 800;
+        }
+
+        #textHome {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15%;
+            box-shadow: 0 0 150px vars.$color6;
+            background: radial-gradient(circle,
                     vars.$color5 60%,
                     rgba(vars.$color5, 0.6) 80%,
-                    rgba(vars.$color5, 0) 100%
-                    );
-                    
-                p{
+                    rgba(vars.$color5, 0) 100%);
+
+            p {
                 font-family: vars.$font2;
                 font-weight: 800;
                 font-size: vars.$font-size6;
-                color:vars.$color25;
+                color: vars.$color25;
                 text-shadow:
-                2px -1px 0 vars.$color1;
+                    2px -1px 0 vars.$color1;
             }
-
-            }
-            
         }
+    }
 
 
 
 
 
-     //bubbles span
+    //bubbles span
     .bubbles {
         position: absolute;
         inset: 0;
@@ -157,15 +154,11 @@
         position: absolute;
         bottom: -100px;
         animation-duration: 15s;
-
         width: 50px;
         height: 50px;
         border-radius: 50%;
-
         background: radial-gradient(circle at 30% 30%, vars.$color5, vars.$color3);
-
         box-shadow: 0 0 10px vars.$color2;
-
         opacity: 0;
         animation: floatUp 12s linear infinite;
 
@@ -227,22 +220,22 @@
 
 
 
-//circle animations 
+    //circle animations 
 
     @keyframes slideInLeft {
-    0% {
-        transform: translateX(-100px);
-        opacity: 0;
+        0% {
+            transform: translateX(-100px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
 
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-//bubbles animation
-@keyframes floatUp {
+    //bubbles animation
+    @keyframes floatUp {
         10% {
             transform: translate(30%, 0) scale(1);
             opacity: 0;
@@ -273,4 +266,4 @@
     }
 
 
-} 
+}

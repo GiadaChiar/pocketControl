@@ -40,7 +40,6 @@ export default function Registration() {
         )
 
         if (!credentials) return;
-        console.log(credentials);
 
         try {
             const user = await registartionService(
@@ -49,38 +48,35 @@ export default function Registration() {
                 credentials.surname,
                 credentials.password,
             )
-            console.log("richiesta che è tornata", user);
-            
-                console.log("arrivato richiesta", user.type)
-                if (user.success === false) {
+            if (user.success === false) {
+                setPopup({
+                    visible: true,
+                    alert: "Attenzione",
+                    message: user.error,
+                });
+            }
+            if (user.success === true) {
+                setPopup({
+                    visible: true,
+                    alert: "Registrazione eseguita",
+                    message: "Benvenuto"
+                });
+                if (user.data) {
+                    localStorage.setItem("token", user.data);
+
                     setPopup({
                         visible: true,
-                        alert: "Attenzione",
-                        message: user.error,
+                        alert: "Registrazione effettuata",
+                        message: "Procedere con il login"
                     });
-                }
-                if (user.success === true) {
-                    setPopup({
-                        visible: true,
-                        alert: "Registrazione eseguita",
-                        message: "Benvenuto"
-                    });
-                    if (user.data) {
-                        localStorage.setItem("token", user.data);
 
-                        setPopup({
-                            visible: true,
-                            alert: "Registrazione effettuata",
-                            message: "Procedere con il login"
-                        });
-
-                        setTimeout(() => {
-                            navigate("/logIn");
-                        }, 1200); // 1.2 second
-                    }
-                    
-                    return;
+                    setTimeout(() => {
+                        navigate("/logIn");
+                    }, 1200); // 1.2 second
                 }
+
+                return;
+            }
 
         } catch {
             setPopup({

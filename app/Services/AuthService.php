@@ -14,12 +14,7 @@ class AuthService
         $authHeader = $headers['Authorization'] ?? null;
 
         if (!$authHeader) {
-            http_response_code(401);
-            echo json_encode([
-                "success" => false,
-                "error" => "Token mancante"
-            ]);
-            exit;
+            throw new \Exception("Token mancante", 401);
         }
 
         $token = str_replace('Bearer ', '', $authHeader);

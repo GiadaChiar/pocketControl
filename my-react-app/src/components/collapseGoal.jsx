@@ -31,7 +31,7 @@ export default function CollapseGoal() {
             return;
         }
 
-    
+
 
         if (Number(getTarget) <= 0 || Number(getCurrent) < 0 || Number(getTarget) < Number(getCurrent)) {
             setPopup({
@@ -41,13 +41,6 @@ export default function CollapseGoal() {
             });
             return
         }
-
-        console.log("taget", getTarget);
-        console.log("current", getCurrent);
-        console.log("description", getDescription);
-        console.log("date", getDate);
-
-
 
         try {
             const user = await NewGoal(

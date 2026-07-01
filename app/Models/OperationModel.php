@@ -72,11 +72,6 @@ class OperationModel
             $params[":value"] = $value;
         }
 
-   /* if ($field && $value){
-        $query .=" AND {$field} = :value";
-        $params[":value"] = $value;
-    }*/
-
 
     if (
         !empty($date['start_date']) &&
@@ -208,20 +203,22 @@ class OperationModel
         return $results;
     }
 
-
+    
 
     //get sum of all expenses filter by time range
-    public function SumExpenses(int $idUser, ?string $start_date = null, ?string $end_date = null){
+    public function SumExpensesVSEntry(int $idUser, string $type, ?string $start_date = null, ?string $end_date = null){
+
         $query = "
         SELECT type, 
         SUM(amount) As total 
         FROM pocket.transactions 
-        WHERE type = 'spesa'
+        WHERE type = :type
         AND user_id = :user_id
         ";
 
         $params = [
             ":user_id" => $idUser,
+            ":type" => $type
         ];
 
         if (!empty($start_date) && !empty($end_date)) {
@@ -235,7 +232,7 @@ class OperationModel
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
 
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $results;
 

@@ -1,61 +1,62 @@
-
 @use 'variables.scss' as vars;
 
 
 
-.container-fluid{
+.container-fluid {
     max-height: 40px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    .navbar-brand{
+
+    .navbar-brand {
         font-size: vars.$font-size6;
         margin-left: 20px;
-
     }
 
-    .navbar-toggler{
+    .navbar-toggler {
         border: none;
-        
-        &:focus{
+
+        &:focus {
             box-shadow: none;
             outline: none;
         }
-    
-        .navbar-toggler-icon{
-        background-color: vars.$color6;
-    }
+
+        .navbar-toggler-icon {
+            background-color: vars.$color6;
+        }
     }
 
-    .offcanvas-header{
+    .offcanvas-header {
         background-color: vars.$color6;
         max-height: 50px;
-        #NavbarLabel{
+
+        #NavbarLabel {
             font-size: vars.$font-size5;
         }
-        
+
     }
 
-    .offcanvas-body{
+    .offcanvas-body {
         background-color: vars.$color1;
-        .navbar-nav.justify-content-end.flex-grow-1.pe-3{
-            margin-top:60px;
-    .nav-link{
-        font-size: vars.$font-size5;
-        font-family: vars.$font1;
-        color:vars.$color25;
-        font-weight: 500;
 
-        &:hover{
-            color:vars.$color4;
-            text-shadow:
-                -1px -1px 0 vars.$color1;
-                font-weight: 800;
+        .navbar-nav.justify-content-end.flex-grow-1.pe-3 {
+            margin-top: 60px;
+
+            .nav-link {
+                font-size: vars.$font-size5;
+                font-family: vars.$font1;
+                color: vars.$color25;
+                font-weight: 500;
+
+                &:hover {
+                    color: vars.$color4;
+                    text-shadow:
+                        -1px -1px 0 vars.$color1;
+                    font-weight: 800;
+                }
+            }
         }
-
-    }
-}
     }
 
-    
+
 }
 
 .disabled-link {
@@ -68,23 +69,25 @@
 /* Responsive */
 /*pc */
 @media (min-width: 900px) {
-.navbar-brand{
-    font-size: vars.$font-size4;;
-}
-#NavbarLabel{
-    font-size:vars.$font-size4plus;
-}
+    .navbar-brand {
+        font-size: vars.$font-size4;
+        ;
+    }
 
-.offcanvas-body{
-    ul>li{
-        .nav-link{
-            font-size: vars.$font-size4;
+    #NavbarLabel {
+        font-size: vars.$font-size4plus;
+    }
+
+    .offcanvas-body {
+        ul>li {
+            .nav-link {
+                font-size: vars.$font-size4;
+            }
         }
     }
-}
 
-button{
-    transform: scale(1.4);
-}
+    button {
+        transform: scale(1.4);
+    }
 
 }

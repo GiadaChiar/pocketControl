@@ -1,0 +1,256 @@
+# Financial Control
+
+Financial Control is a full-stack web application designed to help users monitor and manage their personal finances. The application allows users to record income and expenses, create budgets and savings goals, visualize financial data through interactive charts, and monitor spending over time.
+
+This project was developed as a full-stack learning experience using React and native PHP, with a strong focus on software architecture, REST APIs, authentication, and database management.
+
+---
+
+## Features
+
+### User Authentication
+- User registration
+- Secure login
+- JWT (JSON Web Token) authentication
+- Protected API endpoints
+
+### Dashboard
+- Financial overview
+- Monthly statistics
+- Spending summaries
+- Interactive charts
+
+### Transactions
+- Add income and expenses
+- View transaction history
+- Delete transactions
+- Monthly transaction summaries
+
+### Budget Management
+- Create budgets
+- Define spending limits
+- Track budget usage
+- Automatic budget percentage calculation
+
+### Financial Goals
+- Create savings goals
+- Update current progress
+- Track completion percentage
+
+### Data Visualization
+- Pie Chart
+- Bar Chart
+- Line Chart
+- Radial Progress Chart
+
+### Filtering System
+- Filter transactions
+- Filter budgets
+- Filter goals
+- Date range filtering
+- Transaction type filtering
+
+### CRUD Operations
+The application supports complete Create, Read, Update and Delete operations for:
+
+- Transactions
+- Budgets
+- Goals
+
+---
+
+## Technologies
+
+### Frontend
+
+- React
+- Vite
+- SCSS
+- Bootstrap
+- Recharts
+- JavaScript (ES6)
+
+### Backend
+
+- Native PHP
+- REST API
+- JWT Authentication
+- PDO
+- MySQL
+
+---
+
+## Project Structure
+
+```
+Financial-Control/
+│
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+|   ├── api/
+│   ├── services/
+│   ├── style/
+│   └── assets/
+│
+├── backend/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Services/
+│   ├── Middleware/
+│   └── Core/
+│
+└── public/
+└── routes/
+└── database.sql
+```
+
+---
+
+## REST API
+
+The backend exposes a RESTful API that communicates with the React frontend using JSON.
+
+Example endpoints:
+
+### Authentication
+
+```
+POST /api/register
+POST /api/login
+```
+
+### Transactions
+
+```
+POST /api/operations
+GET  /api/operations
+GET  /api/monthOperations
+GET  /api/allExpense
+```
+
+### Budgets
+
+```
+POST /api/budgets
+GET  /api/budgets
+DELETE /api/budgets/{id}
+```
+
+### Goals
+
+```
+POST /api/goals
+GET  /api/goals
+PUT  /api/goals/{id}
+DELETE /api/goals/{id}
+```
+
+---
+
+## Authentication
+
+Authentication is implemented using JSON Web Tokens (JWT).
+
+After a successful login:
+
+1. The backend generates a JWT.
+2. The frontend stores the token.
+3. Every protected request includes the token inside the Authorization header.
+4. The backend validates the token before processing the request.
+
+---
+
+## Charts
+
+The dashboard includes several interactive charts built with Recharts:
+
+- Pie Chart
+- Line Chart
+- Bar Chart
+- Radial Progress Chart
+
+These charts provide a clear visualization of:
+
+- income
+- expenses
+- budget usage
+- goal progress
+- monthly trends
+
+---
+
+## Database
+
+The application uses MySQL.
+
+The complete database schema is available in:
+
+```
+database.sql
+```
+
+Import the file before running the backend.
+
+---
+
+## Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/yourusername/financial-control.git
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Backend
+
+Configure your database credentials inside the backend configuration files and start your local PHP server.
+
+---
+
+## Learning Objectives
+
+This project was developed to improve practical skills in:
+
+- Full-stack development
+- REST API design
+- Authentication using JWT
+- React component architecture
+- Native PHP backend development
+- MySQL database design
+- CRUD operations
+- Data visualization
+- Client-server communication
+
+---
+
+## Future Improvements
+
+- Email notifications
+- Password recovery
+- User profile management
+- Export financial reports
+- Responsive mobile improvements
+- Dashboard customization
+- Dark mode
+
+---
+
+## Author
+
+Developed by **Giada Chiara** as a full-stack educational project.
+
+---
+
+## License
+
+This project was created for educational purposes.

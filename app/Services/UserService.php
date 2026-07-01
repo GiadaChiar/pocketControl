@@ -42,13 +42,6 @@ class UserService
             );
         }
 
-        // 2.check if my password equal to db password PASSWORD IN CHIARO
-        /*if ($password !== $user['password']) {
-            throw new \Exception("Password errata, riprovare");
-        }*/
-
-
-
             if (!password_verify($password, $user['password'])){
             throw new \Exception("Password errata, riprovare");
         }

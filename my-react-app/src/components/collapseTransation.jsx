@@ -28,7 +28,6 @@ export default function CollapseTransation() {
         const loadCategories = async () => {
             try {
                 const response = await CategoriesFetch();
-                console.log("categories response:", response);
                 if (response.success === false) {
                     setPopup({
                         visible: true,
@@ -42,7 +41,6 @@ export default function CollapseTransation() {
                         : []
 
                     setCategories(response.data);
-                    console.log(response.data)
                 }
             } catch {
                 setPopup({

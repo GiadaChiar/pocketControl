@@ -42,8 +42,6 @@ export default function GoalChar() {
                 const dates = getCurrentMonthRange();
                 start = dates.start;
                 end = dates.end;
-
-                console.log("eeend ....", end);
                 title = "Obbiettivi di questo mese";
             }
 

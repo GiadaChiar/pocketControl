@@ -13,8 +13,6 @@ export async function FiltersTable(
         start_date,
         end_date,
         extra_type
-
-
     });
 
 }

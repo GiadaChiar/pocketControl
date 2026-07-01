@@ -19,7 +19,7 @@ class GoalService
 {
 
     private PDO $db;
-    private TransactionService $transaction;
+    private TransactionService $transactionService;
     private UserModel $userModel;
     private GoalModel $goalModel;
     private OperationModel $operationModel;
@@ -30,7 +30,7 @@ class GoalService
     public function __construct(PDO $db)
     {
         $this->db = $db;
-        $this->transaction = new TransactionService($db);
+        $this->transactionService = new TransactionService($db);
         $this->userModel = new UserModel($db);
         $this->goalModel = new GoalModel($db);
         $this->operationModel = new OperationModel($db);
@@ -38,10 +38,9 @@ class GoalService
     }
 
 
-
+    //new Goal
     public function insert($data, $idUser)
     {
-
 
         try {
             //search by userID 
@@ -61,10 +60,9 @@ class GoalService
         } catch (\Throwable $e) {
 
             throw new \Exception("Inserimento,non è stato completato");
-
-            exit;
         }
     }
+
 
 
     //get all bugets by range time
@@ -77,7 +75,6 @@ class GoalService
             if (!$existingUser) {
                 throw new \Exception("Utente non registrato correttamente, effettuare il login");
             }
-
 
             $results = $this->goalModel->get($idUser, $data);
 
@@ -94,6 +91,7 @@ class GoalService
 
 
 
+    //delete goal
     public function delete(int $id, int $userId): bool
     {
         $user = $this->userModel->findByField("id", $userId);
@@ -107,13 +105,12 @@ class GoalService
 
 
 
-
+//update Goal with sum with user value
     public function updateGoal(int $idGoal, float $new_value, int $userId)
     {
 
+        return $this->transactionService->run(function ($db) use ($idGoal, $new_value,$userId) {                                                                  
         //check if existing goal and get updateGoalcontroll with user
-
-        try {
             //search by userID 
             $data = $this->goalModel->getFromId($userId, $idGoal);
 
@@ -125,7 +122,6 @@ class GoalService
 
             $this->goalModel->update((int)$userId, (int)$idGoal, (float)$sum);
 
-           
             //new insert operation stransfer goal name
             $new_data = [
                 "category" => "obbiettivo",
@@ -135,38 +131,18 @@ class GoalService
                 "date" => date("Y-m-d")
             ];
 
-
-
             $idInsert = $this->operationModel->insert($new_data, (int)$userId);
-
-
 
             //email logic 
             $percentage = ($sum / $data["target_amount"]) * 100;
 
-        
-
-
-            $user = $this->userModel->findByField("id", $userId);
-
-
-            $email = $user["email"];
-            $name = $user["name"];
-
-            
-
-
-            //EMAIL >85%
-           
-
                 // EMAIL LOGIC
-                if ($percentage >= 20 ) {
-
-
+                if ($percentage >= 85 ) {
+                $user = $this->userModel->findByField("id", $userId);
 
                     $this->mailService->sendGoalCongrats(
-                        $email,
-                        $name,
+                        $user["email"],
+                        $user["name"],
                         $data["description"],
                         $percentage
                     );
@@ -176,9 +152,11 @@ class GoalService
 
                 if ($percentage >= 100 && !$data["email_100_sent"]) {
 
+                $user = $this->userModel->findByField("id", $userId);
+                
                     $this->mailService->sendGoalCongrats(
-                        $email,
-                        $name,
+                        $user["email"],
+                        $user["name"],
                         $data["description"],
                         $percentage
                     );
@@ -190,9 +168,6 @@ class GoalService
                 "data" => $sum,
                 "percentage" => $percentage
             ];
-        } catch (\Throwable $e) {
-
-            throw new \Exception($e->getMessage());
-        }
+        });
     }
 }

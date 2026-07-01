@@ -16,12 +16,12 @@ function DashBoard() {
 
     return (
         <>
-            <div id = "barchar_page">
+            <div id="barchar_page">
                 <Menu />
                 <div className="dashboard-bg">
-            <h1>Il tuo andamento finanziario</h1>
+                    <h1>Il tuo andamento finanziario</h1>
                     <div id="graphic_section">
-                        <TotalChar/>
+                        <TotalChar />
                         <BarChar />
                         <div className="divider-glow"></div>
                         <PieChar />
@@ -30,12 +30,12 @@ function DashBoard() {
                         <div className="divider-glow"></div>
                         <BudgetChar />
                         <div className="divider-glow"></div>
-                        <div id ="charTable">
-                        <h3 id="titleTableDash" className="ChartH3">Cerca gli inserimenti</h3>
-                        <ShowTable />
+                        <div id="charTable">
+                            <h3 id="titleTableDash" className="ChartH3">Cerca gli inserimenti</h3>
+                            <ShowTable />
                         </div>
-            </div>
-            </div>
+                    </div>
+                </div>
             </div>
         </>
     );

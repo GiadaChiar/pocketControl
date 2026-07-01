@@ -1,7 +1,7 @@
 
 
 
-export function TableGoal({data=[], onDelete, onClean, onAdd}) {
+export function TableGoal({ data = [], onDelete, onClean, onAdd }) {
     return (
         <>
             <table className="table">
@@ -25,10 +25,10 @@ export function TableGoal({data=[], onDelete, onClean, onAdd}) {
                 <tbody>
                     {data.map((row) => (
                         <tr key={row.id}>
-                            <td>{row.target_amount}</td> 
-                            <td>{row.current_amount}</td> 
-                            <td>{row.date}</td> 
-                            <td>{row.description}</td> 
+                            <td>{row.target_amount}</td>
+                            <td>{row.current_amount}</td>
+                            <td>{row.date}</td>
+                            <td>{row.description}</td>
                             <td><button
                                 className="btn btn-danger btn-plus"
                                 onClick={() => onAdd(row)}
@@ -43,9 +43,9 @@ export function TableGoal({data=[], onDelete, onClean, onAdd}) {
                                 ✕
                             </button>
                             </td>
-                        </tr>   
-                        
-                            ))}
+                        </tr>
+
+                    ))}
                 </tbody>
             </table>
         </>
@@ -101,7 +101,7 @@ export function TableBudget({ data = [], onDelete, onClean }) {
 
 
 
-export function TableTransaction({ data = [], onDelete , onClean}) {
+export function TableTransaction({ data = [], onDelete, onClean }) {
     return (
         <>
             <table className="table">

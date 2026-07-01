@@ -17,7 +17,7 @@ import { loginService } from "../services/authService";
 export function LogIn() {
 
     const navigate = useNavigate();
-   
+
 
     //get input
     const [getEmail, setEmail] = useState("");
@@ -42,8 +42,6 @@ export function LogIn() {
                 credentials.email.trim().toLowerCase(),
                 credentials.password.trim()
             );
-
-            console.log("arrivato richiesta", user.type)
             if (user.success === false) {
                 setPopup({
                     visible: true,
@@ -71,7 +69,7 @@ export function LogIn() {
                     }, 1200); // 1.2 scond
                 }
                 return;
-                
+
             }
         } catch {
             setPopup({

@@ -18,11 +18,6 @@ class UserController
     }
 
 
-
-
-
-
-
     public function login()
     {
         try {
