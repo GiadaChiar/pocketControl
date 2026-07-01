@@ -45,7 +45,27 @@ const MyPieChart = (props) => {
     );
 };
 
-export default function PieChartWith({ isAnimationActive = true , data}) {
+export default function PieChartWith({ isAnimationActive = true , data = []}) {
+    const hasData = data.length > 0;
+    if (!hasData) {
+        return (
+            <div style={{
+                width: '100%',
+                maxWidth: '450px',
+                aspectRatio: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '12px',
+                background: '#f3f4f6'
+            }}>
+                <p style={{ color: '#6b7280' }}>
+                    Nessun dato da visualizzare
+                </p>
+            </div>
+        );
+    }
+    
     return (
         <PieChart style={{ width: '100%', maxWidth: '450px', maxHeight: '80vh', aspectRatio: 1 }} responsive>
             <Pie

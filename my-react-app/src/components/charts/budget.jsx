@@ -10,24 +10,14 @@ import {
 
 export default function BudgetLinearChart({result}) {
 
-   /* // 🔥 DATI FINTI
-    const data = [
-        {
-            name: "Budget Mensile",
-            budget: 1000,
-            spent: 1250 // 👉 supera il budget
-        }
-    ];*/
+    const budget = Number(result?.limit_amount ?? 0);
+    const spent = Number(result?.spent ?? 0);
+    const remaining = Number(result?.remaining ?? 0);
+    const progress = Number(result?.progress ?? 0);
 
-
-
-    const budget = Number(result.limit_amount);
-    const spent = Number(result.spent);
-    const remaining = Number(result.remaining);
-    const progress = Number(result.progress);
-    const description = result.description;
-    const start = result.start_date;
-    const end = result.end_date;
+    const description = result?.description || "budget";
+    const start = result?.start_date || "--/--/----";
+    const end = result?.end_date || "--/--/----";
 
 
     const data = [
@@ -55,7 +45,7 @@ export default function BudgetLinearChart({result}) {
         }}>
 
             <h3 style={{ textAlign: "center" }}>
-                {description}
+                {description || "Non vi sono budget specifici di questo mese"}
             </h3>
 
             <ResponsiveContainer width="100%" height={250}>

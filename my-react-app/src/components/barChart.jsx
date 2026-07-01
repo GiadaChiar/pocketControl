@@ -9,6 +9,7 @@ import { AreaChartExample } from "./charts/graphicAreaChar";
 import { formatChartData } from "../function/FormatData";
 
 
+
 export default function BarChar() {
     const [getStartDate, setStartDate] = useState("");
     const [getEndDate, setEndDate] = useState("");

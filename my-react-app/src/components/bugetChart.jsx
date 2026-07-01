@@ -114,12 +114,16 @@ export default function BudgetChar() {
                             {getTitle}
                         </h3>
                         <div className="goalsContainer">
-                            {chartData.map((goal, index) => (
-                                <BudgetLinearChart
-                                    key={goal.id ?? index}
-                                    result={goal}
-                                />
-                            ))}
+                            {chartData.length > 0 ? (
+                                chartData.map((goal, index) => (
+                                    <BudgetLinearChart
+                                        key={goal.id ?? index}
+                                        result={goal}
+                                    />
+                                ))
+                            ) : (
+                                <BudgetLinearChart result={{}} />
+                            )}
                         </div>
                     </div>
 

@@ -6,7 +6,7 @@ import "../style/popUp.scss";
 import { useState, useEffect } from "react";
 import { NeedleChar } from "../services/transactionService";
 import { getCurrentMonthRange } from "../function/CurrentMonth";
-//import { formatPieData } from "../function/FormatData";
+
 
 
 export default function GoalChar() {
@@ -111,7 +111,7 @@ export default function GoalChar() {
                 <div className="inLine">
                     <div className="chartWrapperBar">
                         <h3 id="titleGoal" className="ChartH3">
-                            {getTitle}
+                            {getTitle || "Nessun Obbiettivo trovato di questo mese"}
                         </h3>
                         <div className="goalsContainer">
                             {chartData.map((goal, index) => (

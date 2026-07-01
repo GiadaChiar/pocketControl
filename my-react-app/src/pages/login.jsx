@@ -17,6 +17,7 @@ import { loginService } from "../services/authService";
 export function LogIn() {
 
     const navigate = useNavigate();
+   
 
     //get input
     const [getEmail, setEmail] = useState("");

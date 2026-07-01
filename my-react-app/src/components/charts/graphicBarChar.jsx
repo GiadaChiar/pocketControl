@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 
 
 // #endregion
-export default function SimpleBarChart({data}){
+export default function TotalChart({data}){
     return (
         
         <BarChart

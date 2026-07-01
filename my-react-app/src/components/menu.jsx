@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 
 
@@ -9,6 +9,7 @@ function Menu() {
 
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -81,22 +82,58 @@ function Menu() {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/login">
+                                    <Link
+                                        className={`nav-link ${location.pathname === "/login" ? "disabled-link" : ""}`}
+                                        to="/login"
+                                        onClick={(e) => {
+                                            if (location.pathname === "/login") {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        aria-disabled={location.pathname === "/login"}
+                                    >
                                         Accedi
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/register">
+                                    <Link
+                                        className={`nav-link ${location.pathname === "/register" ? "disabled-link" : ""}`}
+                                        to="/register"
+                                        onClick={(e) => {
+                                            if (location.pathname === "/register") {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        aria-disabled={location.pathname === "/register"}
+                                    >
                                         Registrati
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/dashboard">
+                                    <Link
+                                        className={`nav-link ${location.pathname === "/dashboard" ? "disabled-link" : ""}`}
+                                        to="/dashboard"
+                                        onClick={(e) => {
+                                            if (location.pathname === "/dashboard") {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        aria-disabled={location.pathname === "/dashboard"}
+                                    >
                                         Dashboard
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/insert">
+                                    <Link
+                                        className={`nav-link ${location.pathname === "/insert" ? "disabled-link" : ""}`}
+                                        to="/insert"
+                                        onClick={(e) => {
+                                            if (location.pathname === "/insert") {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        aria-disabled={location.pathname === "/insert"}
+                                    >
                                         Inserimenti
                                     </Link>
                                 </li>

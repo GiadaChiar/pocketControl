@@ -110,3 +110,17 @@ export function bugetSummary(data) {
     );
 
 }
+
+
+export function TotalEntry() {
+    const params = new URLSearchParams();
+
+    return apiRequestToken(
+        `/api/bugetSummary?${params.toString()}`,
+        {
+            method: "GET"
+        }
+    );
+
+}
+

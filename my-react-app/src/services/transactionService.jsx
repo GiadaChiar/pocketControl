@@ -1,5 +1,5 @@
 
-import { insertTransaction, filterBarChar, filterPieChar, bugetSummary } from "../api/transactionApi";
+import { insertTransaction, filterBarChar, filterPieChar, bugetSummary, TotalEntry } from "../api/transactionApi";
 import { searchFilter } from "../api/filterService";
 
 
@@ -70,5 +70,8 @@ export async function BugetsChar(
 }
 
 
+export async function Total() {
+    return await TotalEntry();
+}
 
 

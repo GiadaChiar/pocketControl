@@ -72,7 +72,7 @@ export default function CollapseTransation() {
                 : getCategory;
 
         try {
-            const user = await NewTransation(
+            const results = await NewTransation(
                 categoryToSave,
                 getType,
                 Number(getAmount),
@@ -81,22 +81,54 @@ export default function CollapseTransation() {
 
             );
 
-            if (user.success === false) {
+            if (results.success === false) {
                 setPopup({
                     visible: true,
                     alert: "Attenzione",
-                    message: user.error,
+                    message: results.error,
                 });
             }
-            if (user.success === true) {
+
+            if (results.success === true) {
+
+                const list = [];
+
+                if (Array.isArray(results.data.budgets) && results.data.budgets.length > 1) {
+                    results.data.budgets.forEach((budget, index) => {
+                        list.push(
+                            `${index + 1}. ${budget.description}: ${budget.percentage.toFixed(1)}% (${budget.used}/${budget.budget})`
+                        );
+                    });
+
+                    setPopup({
+                        visible: true,
+                        alert: "Inserimeto eseguito",
+                        message: `Attenzione Budget\n\n${list.join("\n")}`
+                    });
+
+                    return;
+                }
+                if (results.data.budgets.length === 1) {
+                    const result = results.data.budgets[0];
+
+                    setPopup({
+                        visible: true,
+                        alert: "Inserimeto eseguito",
+                        message:
+                            `Attenzione Budget.\n` +
+                            `${result.description}: ${result.percentage.toFixed(1)}% (${result.used}/${result.budget})`
+                    });
+
+                    return;
+                }
+
                 setPopup({
                     visible: true,
-                    alert: "Registrazione eseguita",
-                    message: "Obbiettivo inserito"
+                    alert: "Inserimeto eseguito",
+                    message: "Registrazione eseguita"
                 });
                 return;
             }
-
         } catch {
             setPopup({
                 visible: true,

@@ -5,6 +5,7 @@ import PieChar from "../components/pieChart";
 import GoalChar from "../components/goalChart";
 import BudgetChar from "../components/bugetChart";
 import ShowTable from "../components/showTable";
+import TotalChar from "../components/totalChart";
 import "../style/menu.scss";
 import "../style/default.scss";
 import "../style/dashboard.scss";
@@ -19,7 +20,8 @@ function DashBoard() {
                 <Menu />
                 <div className="dashboard-bg">
             <h1>Il tuo andamento finanziario</h1>
-            <div id="graphic_section">
+                    <div id="graphic_section">
+                        <TotalChar/>
                         <BarChar />
                         <div className="divider-glow"></div>
                         <PieChar />

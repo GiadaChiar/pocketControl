@@ -7,14 +7,14 @@
 .custom-popup{
     background-color: vars.$color2;
     position: fixed;
-    top:auto;
+    top:0;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border:  1px solid vars.$color32;
-    z-index: 9998;
+    z-index: 9997;
     padding-top: 18px;
     padding-bottom: 18px;
     width: 100%;
@@ -40,7 +40,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         position: relative;
         border:  1px solid vars.$color3;
-        z-index: 9997;
+        z-index: 9999;
 
         h4{
             margin-bottom: 20px;
@@ -64,12 +64,13 @@
 
 .popup-overlay{
     background-color: vars.$color2;
-    position: absolute;
+    position: fixed;
+    inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border:  1px solid vars.$color32;
-    z-index: 9998;
+    z-index: 9997;
     padding-top: 18px;
     padding-bottom: 18px;
     width: 100%;

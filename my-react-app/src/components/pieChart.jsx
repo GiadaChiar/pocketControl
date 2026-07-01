@@ -47,9 +47,21 @@ export default function PieChar() {
                 return;
             }
 
-            const formatted = formatPieData(res.data || []);
-            setChartData(formatted);
-            setTitle(res.title);
+            const formatted = formatPieData(res.data || [])
+            if (formatted.length === 0) {
+                setChartData([
+                    {
+                        name: "Nessun dato",
+                        value: 0
+                    }
+
+                ])
+                setTitle("");
+            } else {
+                setChartData(formatted);
+                setTitle(res.title);
+            }
+            
 
         } catch {
             setPopup({
@@ -97,7 +109,7 @@ export default function PieChar() {
 
 
                 <h3 id="titleBuget" className="ChartH3">
-                    {getTitle}
+                    {getTitle || "Nessun valore di spesa questo mese"}
                 </h3>
 
                 <div className="chartSection">

@@ -33,6 +33,7 @@ export default function ShowTable() {
 
     const handleClean = () => {
         setTableData([]);
+        setTableType("");
     };
 
     const handleOpenAddGoal = (goal) => {
@@ -74,13 +75,13 @@ export default function ShowTable() {
                     console.log(res)
                     setPopup({
                         visible: true,
-                        alert: "Registrazione eseguita",
-                        message: "Obbiettivo inserito"
+                        alert: "Obbiettrivo aggiornato",
+                        message: `Sei al ${res.data.percentage}% del tuo obbiettivo `
                     });
                     setTableData((prev) =>
                         prev.map((g) =>
                             g.id === selectedGoal.id
-                                ? { ...g, current_amount: Number(getGoalValue) }
+                                ? { ...g, current_amount: Number(res.data.data) }
                                 : g
                         )
                     );

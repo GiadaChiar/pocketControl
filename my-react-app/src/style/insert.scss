@@ -1,9 +1,14 @@
 @use "variables.scss" as vars;
 
+html, body {
+    height: 100%;
+    overflow-y: auto !important;
+}
+
     .insert-page {
         width: 100%;
         min-height: 100vh;
-        overflow-y: auto;
+        position: relative;
         background-image: url("../assets/insert.jpeg"); 
         font-family: vars.$font1;
 
@@ -40,7 +45,19 @@
                 border-color: vars.$color25;
 
                 &:hover{
-                    background-color: vars.$color32;
+                    background-color: vars.$color25;
+                }
+            }
+
+            .btn.btn-danger.btn-plus{
+                background-color: vars.$color6;
+                color:vars.$color25;
+                border-color: vars.$color25;
+                &:hover{
+
+                background-color: vars.$color4;
+                border-color: vars.$color25;
+                color:vars.$color25;
                 }
             }
         }
